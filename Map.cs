@@ -8,50 +8,72 @@ namespace WumpusTest
 {
     class Map
     {
-
+        private Room wumpusLocation;
+        private Room playerLocation;
+        private Room batsLocations;
+        private Room bottomlesspitlocations;
         public Map()
         {
 
         }
-        public room movesForward()
+        public Room movesForward()
         {
+            Room a = new Room();
+            return a;
             //returns current location of player
         }
-        public Boolean encounterBats()
+        public int encounterHazard()
         {
-            //Checks if user is in the same room as bats
-            //If so returns true, else it returns false
-            return true;
+            
+            //returns -1 if no hazards encountered
+            //returns 0 if bats
+            //returns 1 if bottmoless pit
+            //return 2 if wumpus
+            if (distanceBetweenRooms(playerLocation, wumpusLocation) == 0)
+            {
+                return 2;
+            }
+            if (distanceBetweenRooms(playerLocation, batsLocations) == 0)
+            {
+                return 0;
+            }
+            if (distanceBetweenRooms(playerLocation, bottomlesspitlocations) == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
-        public Boolean encounterWumpus()
-        {
-            //Checks if user is in same room as Wumpus
-            //If so returns true, else it returns false
-            return true;
-        }
-        public Boolean bottomlessPit()
-        {
-            //Checks if user is in the same room as bottomlessPit
-            //If so returns true, else it returns false
-            return true;
-        }
-        public Boolean checkForWumpus()
+        public int checkForWumpus()
         {
             //Checks if Wumpus is two rooms or closer
-            //If so returns true, else returns false
-            return true;
+            //If so returns 2
+            //returns 1 if bottomless pit is two rooms or closer
+            //returns 0 if bats are two rooms or closer
+            if (distanceBetweenRooms(playerLocation, wumpusLocation) <= 2)
+            {
+                return 2;
+            }
+            if (distanceBetweenRooms(playerLocation, batsLocations) <= 2)
+            {
+                return 0;
+            }
+            if (distanceBetweenRooms(playerLocation, bottomlesspitlocations) <= 2)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
-        public Boolean checkForBottomlessPit()
+        public static int distanceBetweenRooms(Room room1, Room room2)
         {
-            //Checks if bottomless pit is two rooms or closer
-            //If so returns true, else returns false
-            return true;
+            //find distance between two rooms and return as an integer
+            return 0;
         }
-        public Boolean checkForBats()
-        {
-            //Checks if bats are two rooms or closer
-            //If so returns true, else returns false
-            return true;
-        }
+
     }
 }

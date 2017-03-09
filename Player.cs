@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,8 @@ namespace WumpusTest
 {
     class Player
     {
+        private int gold;
+        private int numOfArrows;
         public Player()
         {
 
@@ -20,18 +22,20 @@ namespace WumpusTest
         public int getNumOfArrows()
         {
             //returns number of arrows that the user has
-            return 0;
+            return numOfArrows;
         }
         public int getGold()
         {
             //returns amount of gold player has
-            return 0;
+            return gold;
         }
-        public void userPurchase(int numOfArrows, int numOfGold)
+        public void userPurchase(int numOfArrows)
         {
             //updates instance variables in class
             //that pertain to how many of each item
             //user has. 
+            this.numOfArrows += numOfArrows;
+            
         }
     }
 }
