@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,42 +18,40 @@ namespace WumpusTest
             return false;
         }
         //This moves the player if wasd are pressed
-        public static Boolean movePlayer(int player)
+        public static void movePlayer(int player)
         {
-            return false;
+            player.movePlayer;
         }
         //This controls the score for the player
-        public static int score(int playerScore)
+        public static void score (int playerScore)
         {
-            Console.WriteLine("Return 0;");
-            return playerScore;
+            GameControl.getScore;
         }
         //This keeps track of number of arrows
-        public static int numberOfArrows(int arrowCount)
+        public static void numberOfArrows(int arrowCount)
         {
-            Console.WriteLine("Return 0;");
-            return arrowCount;
+            movePlayer.arrowCount;
+
         }
         //This draws the caves when you enter a new room
-        public static Boolean drawCave(int cave)
+        public static void drawCave(int cave)
         {
-            return false;
+            GameControl.getPathways();
         }
         //This displays the warnings for a player encountering an object
-        public static Boolean encounterHazard(int hazard)
+        public static void encounterHazard(int hazard)
         {
-            return false;
+            Map.displayWarningMessage;  
         }
         //This shows the high score in the menu when playing the game
-        public static int highScore(int score)
+        public static void highScore (int score)
         {
-            Console.WriteLine("Return 0;");
-            return score;
+            GameControl.displayHighScore;   
         }
         //This updates the game after every new move is made
         public static void updateGame(int update)
         {
-
+            GameControl.updateUI();
         }
     }
 }
