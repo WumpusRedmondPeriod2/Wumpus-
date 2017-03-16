@@ -8,41 +8,33 @@ namespace WumpusTest
 {
     class UI
     {
+        private bool start = false;
         public UI()
         {
 
         }
-        //This starts the game if the user enter yes 
-        public static Boolean startGame(int start)
+        public void setStart(bool accepted)
         {
-            return false;
+            start = accepted;
+        }
+
+        //This starts the game if the user enter yes 
+        public Boolean startGame(bool start)
+        {
+            return true;
         }
         //This moves the player if wasd are pressed
-        public static void movePlayer(int player)
+        public static void movePlayer(int )
         {
-            player.movePlayer;
+            GameControl.movePlayer;
         }
-        //This controls the score for the player
-        public static void score (int playerScore)
-        {
-            GameControl.getScore;
-        }
-        //This keeps track of number of arrows
-        public static void numberOfArrows(int arrowCount)
-        {
-            movePlayer.arrowCount;
-
-        }
+       
         //This draws the caves when you enter a new room
         public static void drawCave(int cave)
         {
             GameControl.getPathways();
         }
-        //This displays the warnings for a player encountering an object
-        public static void encounterHazard(int hazard)
-        {
-            Map.displayWarningMessage;  
-        }
+       
         //This shows the high score in the menu when playing the game
         public static void highScore (int score)
         {
@@ -52,6 +44,11 @@ namespace WumpusTest
         public static void updateGame(int update)
         {
             GameControl.updateUI();
+        }
+
+        internal static int displayMenu()
+        {
+            throw new NotImplementedException();
         }
     }
 }
