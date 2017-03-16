@@ -24,26 +24,26 @@ namespace WumpusTest
             return true;
         }
         //This moves the player if wasd are pressed
-        public static void movePlayer(int )
-        {
-            GameControl.movePlayer;
-        }
+        //public static void movePlayer(int )
+        //{
+            //GameControl.movePlayer;
+        //}
        
         //This draws the caves when you enter a new room
         public static void drawCave(int cave)
         {
-            GameControl.getPathways();
+            //GameControl.getPathways();
         }
        
         //This shows the high score in the menu when playing the game
         public static void highScore (int score)
         {
-            GameControl.displayHighScore;   
+            //GameControl.displayHighScore;   
         }
         //This updates the game after every new move is made
         public static void updateGame(int update)
         {
-            GameControl.updateUI();
+            //GameControl.updateUI();
         }
 
         internal static int displayMenu()
