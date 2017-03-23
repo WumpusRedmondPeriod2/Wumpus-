@@ -1,4 +1,5 @@
-﻿
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,107 +8,29 @@ using System.Threading.Tasks;
 
 
 //3.8.2017 - updated stubbed methods
-
+//3.23.2017 kys
 
 namespace WumpusTest
 {
     class GameControl
     {
-        //TODO replace all "UI" in code with "ui" after the UI fixes error of using static
 
-        //private Trivia trivia;
-        //private HighScore scores;
-        //private Map map;
-        //private Player player;
-        private WumpusTest.UI ui;
-
-        Boolean isRunning;
-
+        private Trivia trivia;
+        private HighScore scores;
+        private Map map;
+        private Player player;
+        
         //constructor - initializes all objects
         public GameControl()
         {
             //initialization
-            //trivia = new Trivia();
-            //scores = new HighScore();
-            //map = new Map();
-            //player = new Player();
-            ui = new UI();
+            trivia = new Trivia();
+            scores = new HighScore();
+            map = new Map();
+            player = new Player();
 
-            isRunning = true;
         }
 
-        //runs the game
-        //public void gameLoop()
-        //{
-        //    while (isRunning)
-        //    {
-
-        //        //TODO make the checks all the same method in map
-        //        //TODO give each hazard a better number than already assigned
-        //        //TODO make encounter hazard seperate than display warning
-        //        //encounters hazards
-        //        if (map.encounterBats())
-        //        {
-        //            UI.encounterHazard(0);
-        //        }
-        //        else if (map.encounterWumpus())
-        //        {
-        //            UI.encounterHazard(1);
-        //        }
-        //        else if (map.bottomlessPit())
-        //        {
-        //            UI.encounterHazard(2);
-        //        }
-
-        //        //checks for hazards
-        //        if (map.checkForBats())
-        //        {
-        //            UI.encounterHazard(0);
-        //        }
-        //        else if (map.checkForWumpus())
-        //        {
-        //            UI.encounterHazard(1);
-        //        }
-        //        else if (map.checkForBottomlessPit())
-        //        {
-        //            UI.encounterHazard(2);
-        //        }
-
-        //        //TODO UI needs a player purchased arrow method, need to get arrows purchased
-        //        //TODO purchase is not supposed to need 2 parameters - get rid of gold parameter
-        //        player.userPurchase(0, 0);
-
-        //        //TODO UI needs a make player shoot method, get room number of room shot at from UI
-        //        if (shoot(0) == true)
-        //        {
-        //            endGame();
-        //        }
-
-        //        //TODO make movePlayer more detailed
-        //        //TODO get the room moved into by the UI
-        //        movePlayer(0);
-        //    }
-
-        //}
-
-        //the menu function - allows to go to see high score or to run gameloop
-        public void menu()
-        {
-            ////TODO UI needs to add a displayMenu method
-            //int selection = WumpusTest.UI.displayMenu();
-            //if (selection == 0)
-            //{
-            //    gameLoop();
-            //}
-            //else if (selection == 1)
-            //{
-            //    getHighScores();
-            //}
-            //else
-            //{
-            //    //close program here
-            //}
-        }
 
         //logs the high score if it is one, then ends game
         public void endGame()
@@ -124,16 +47,17 @@ namespace WumpusTest
         }
 
         //shoots an arrow at specified room
-        public Boolean shoot(int room)
+        public bool shoot(int room)
         {
-            ////TODO subtract arrows from player
-            ////TODO need method to get location of WUMPUS
-            //if (player.getNumOfArrows() > 0)
-            //{
-            //    //check if room has WUMPUS
-            //    //if yes, kill, return true
-            //    //if no, return false;
-            //}
+            
+            if (player.getNumOfArrows() > 0)
+            {
+                player.updateInventory(-1,0);
+                if(map.hasWumpus(room)){
+                    return true;
+                } 
+                return false;
+            }
 
             ////TODO remove this
             return true;
@@ -142,32 +66,35 @@ namespace WumpusTest
         //sends high scores to be displayed
         public void getHighScores()
         {
-            //TODO UI needs to fix their highScore method to accept an array of integers
-            //UI.highScore(scores.highScores());
+       //UI.highScore(scores.highScores());
         }
 
         //moves the Player
-        public void movePlayer(int room)
+        public InGameRenderInfo movePlayer(int room)
         {
-            ////TODO write a method in map to update the location of the palyer
-            ////map.move(room)
-            //if (askQuestion())
-            //{
-            //    //TODO player needs to keep track of values
-            //    player.addGold();
-            //}
+            InGameRenderInfo render = new InGameRenderInfo();
+            //player gets gold, updates render for UI
+            player.updateInventory(0, 1);
+            render.GoldCount = player.getGold();
+            //updates location of player
+            map.move(room);
+            render.CaveConnections = map.getConnections();
+            if (player.getGold < 1)
+            {
+                render.IsGameOver = true;
+            }
         }
 
-        //encounters a hazard and asks questions accordingly
+
+        //encounters a hazard and asks questions accordingly 
         public void encounterHazard(int hazard)
         {
 
         }
 
         //asks a question
-        private Boolean askQuestion()
+        private bool askQuestion()
         {
-            throw new NotImplementedException();
             ////TODO implement a Question object
             ////Question q = trivia.generateQuestion();
             //String q = trivia.getQuestion();
