@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +8,22 @@ namespace WumpusTest
 {
     public class InGameRenderInfo
     {
+        //is game over
         public bool IsGameOver;
 
+        //displayed num of arrows
         public int ArrowCount;
 
+        //displayed goldcount
         public int GoldCount;
 
+        //TODO reformat this array
         public int[,] CaveConnections;
 
-        public int health;
-
-        //Add more late.
+        //whether or not a question should be asked
+        public Boolean askQuestion;
+        //question and answers - input goes to control
+        public String question;
+        public String[] answers;
     }
 }
