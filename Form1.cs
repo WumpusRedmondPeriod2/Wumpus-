@@ -41,16 +41,26 @@ namespace WumpusTest
             label2.Text = info.GoldCount.ToString();
 
             button1.Text = info.CaveConnections[13,1].ToString();
+
+            button2.Text = info.CaveConnections[14, 2].ToString();
+
+            button3.Text = info.CaveConnections[15, 3].ToString();
+
+            button4.Text = info.CaveConnections[16, 4].ToString();
+
+            button5.Text = info.CaveConnections[17, 5].ToString();
+
+            button6.Text = info.CaveConnections[18, 6].ToString();
         }
 
         private void GoldCount_Click(object sender, EventArgs e)
         {
-
+            int startingGoldCount = 100;
         }
 
         private void ArrowCount_Click(object sender, EventArgs e)
         {
-
+            int startingArrowAmount = 30;
         }
 
       
@@ -94,11 +104,11 @@ namespace WumpusTest
             ui.game.movePlayer(6);
         }
 
-        
-
-     
-
-       
+        private void HealthBar_Click(object sender, EventArgs e)
+        {
+            int maxHealth = 100;
+            int minHealth = 0;
+        }
     }
 }
     
