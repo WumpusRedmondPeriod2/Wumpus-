@@ -9,9 +9,11 @@ namespace WumpusTest
     class UI
     {
         private bool start = false;
+        public GameControl game = new GameControl();
+
         public UI()
         {
-
+           
         }
         public void setStart(bool accepted)
         {
@@ -23,11 +25,6 @@ namespace WumpusTest
         {
             return true;
         }
-        //This moves the player if wasd are pressed
-        //public static void movePlayer(int )
-        //{
-            //GameControl.movePlayer;
-        //}
        
         //This draws the caves when you enter a new room
         public static void drawCave(int cave)
@@ -36,7 +33,7 @@ namespace WumpusTest
         }
        
         //This shows the high score in the menu when playing the game
-        public static void highScore (int score)
+        public static void highScore (int [] score)
         {
             //GameControl.displayHighScore;   
         }
@@ -45,6 +42,15 @@ namespace WumpusTest
         {
             //GameControl.updateUI();
         }
+        public int getArrowCount(int count)
+        {
+            return count;
+        }
+        public int getGoldCount(int g)
+        {
+            return g;
+        }
+
 
         internal static int displayMenu()
         {
