@@ -30,8 +30,8 @@ namespace WumpusTest
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            //InGameRenderInfo returnInfo = _gameController.startGame();
-            //enderScene(returnInfo);
+            InGameRenderInfo returnInfo = ui.game.startGame();
+            RenderScene(returnInfo);
         }
 
         private void RenderScene(InGameRenderInfo info)
@@ -78,37 +78,55 @@ namespace WumpusTest
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(1);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(1);
+            RenderScene(renderInformation);
+
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(2);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(2);
+            RenderScene(renderInformation);
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(3);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(3);
+            RenderScene(renderInformation);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(4);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(4);
+            RenderScene(renderInformation);
 
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(5);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(5);
+            RenderScene(renderInformation);
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ui.game.movePlayer(6);
+            InGameRenderInfo renderInformation = ui.game.movePlayer(6);
+            RenderScene(renderInformation);
         }
 
-        private void HealthBar_Click(object sender, EventArgs e)
+        //private void HealthBar_Click(object sender, EventArgs e)
+        //{
+        //    int maxHealth = 100;
+        //    int minHealth = 0;
+        //}
+        public String question(String q)
         {
-            int maxHealth = 100;
-            int minHealth = 0;
+            return q;
         }
+        public  int [,] answerChoices(int [,] a)
+        {
+            return a;
+        }
+
+        
     }
 }
     
