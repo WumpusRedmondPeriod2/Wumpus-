@@ -10,18 +10,11 @@ namespace WumpusTest
     {
         private int gold;
         private int numOfArrows;
-        private static int numOfTurns = 0;
-        public Player(int gold, int numOfArrows)
+        public Player()
         {
             //initializes instance variables
-            this.gold = gold;
-            this.numOfArrows = numOfArrows;
-            numOfTurns++;
-        }
-        public int endGame()
-        {
-            //returns score of player if player defeats wumpus, loses to wumpus or fails to get out of bottomless pit
-            return 0;
+            numOfArrows = 3;
+            gold = 0;
         }
         public int getNumOfArrows()
         {
@@ -33,21 +26,18 @@ namespace WumpusTest
             //returns amount of gold player has
             return gold;
         }
-        public static int getNumOfTurns()
-        {
-            return numOfTurns;
-        }
         public void updateInventory(int numOfArrows, int numOfGold)
         {
             //updates instance variables in class
             //that pertain to how many of each item
             //user has. 
-            this.numOfArrows = numOfArrows;
-            gold = numOfGold;
+            this.numOfArrows += numOfArrows;
+            gold += numOfGold;
         }
-        public int endingScoreOfPlayer()
+        public int endingScoreOfPlayer(int numOfTurns)
         {
-            return 100 - numOfArrows + gold + (10 * numOfArrows);
+            return 100 - numOfTurns + gold + (10 * numOfArrows);
         }
+
     }
 }
