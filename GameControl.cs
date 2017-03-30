@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +12,21 @@ namespace WumpusTest
 {
     class GameControl
     {
-
+        
+        InGameRenderInfo render;
         private Trivia trivia;
         private HighScore scores;
         private Map map;
         private Player player;
-        
+        private String question;
+        private String[] answers;
+
         //constructor - initializes all objects
         public GameControl()
         {
             //initialization
+            render = new InGameRenderInfo();
+            render.IsGameOver = false;
             trivia = new Trivia();
             scores = new HighScore();
             map = new Map();
@@ -31,9 +34,20 @@ namespace WumpusTest
 
         }
 
+        public InGameRenderInfo updateInfo()
+        {
+            render.ArrowCount = player.getNumberOfArrows();
+            render.GoldCount = player.getGold();
+            render.numberOfTurns = player.getNumOfTurns();
+            return render;
+        }
+        
+        public startGame(){
+
+        }
 
         //logs the high score if it is one, then ends game
-        public void endGame()
+        private void endGame()
         {
             //TODO create a calculate score function here
             //TODO high score method should write a score if it is a high score
@@ -47,15 +61,16 @@ namespace WumpusTest
         }
 
         //shoots an arrow at specified room
-        public bool shoot(int room)
+        private bool shoot(int room)
         {
-            
+
             if (player.getNumOfArrows() > 0)
             {
-                player.updateInventory(-1,0);
-                if(map.hasWumpus(room)){
+                player.updateInventory(-1, 0);
+                if (map.hasWumpus(room))
+                {
                     return true;
-                } 
+                }
                 return false;
             }
 
@@ -63,16 +78,9 @@ namespace WumpusTest
             return true;
         }
 
-        //sends high scores to be displayed
-        public void getHighScores()
-        {
-       //UI.highScore(scores.highScores());
-        }
-
         //moves the Player
         public InGameRenderInfo movePlayer(int room)
         {
-            InGameRenderInfo render = new InGameRenderInfo();
             //player gets gold, updates render for UI
             player.updateInventory(0, 1);
             render.GoldCount = player.getGold();
@@ -83,38 +91,34 @@ namespace WumpusTest
             {
                 render.IsGameOver = true;
             }
+            return render;
         }
 
+        public buyArrows(){
 
+        }
         //encounters a hazard and asks questions accordingly 
-        public void encounterHazard(int hazard)
+        private void encounterHazard(int hazard)
         {
 
         }
 
         //asks a question
-        private bool askQuestion()
+        private void updateQuestion()
         {
-            ////TODO implement a Question object
-            ////Question q = trivia.generateQuestion();
-            //String q = trivia.getQuestion();
+            question = trivia.getQuestion();
+            answers = trivia.getPossibleAnswers();
+        }
 
-            ////TODO UI needs a method to display the question and get the selected answer
-            ////UI.displayQuestion(q);
-
-            //char a = trivia.getAnswer();
-
+        private Boolean checkAnswer(int playerChoice)
+        {
             ////TODO UI needs to get an answer from the player and return as char
-            //if (WumpusTest.UI.getAnswer() == a)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-
-            ////returns if player got question right
+            if (trivia.isAnswerCorrect(answers[playerChoice]))
+            {
+                updateQuestion();
+                return true;
+            }
+            return false;
         }
     }
 }
