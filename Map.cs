@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WumpusTest
 {
+
     class Map
     {
         private int wumpusLocation;
@@ -13,7 +14,7 @@ namespace WumpusTest
         private int[] batsLocations;
         private int[] bottomlesspitLocations;
         private Cave cave;
-        
+        private int[,] arrayOfRooms;
         public Map()
         {
             //Sets random starting points for player and hazards
@@ -45,7 +46,8 @@ namespace WumpusTest
             {
                 bottomlesspitLocations[1] = gen.Next(30) + 1;
             }
-            cave = new Cave();
+            cave = new Cave(1);
+            arrayOfRooms = cave.getRoomConnections();
         }
         public Map(int playerLocation, int wumpusLocation, int[] batsLocations, int[] bottomlesspitLocations)
         {
@@ -53,12 +55,19 @@ namespace WumpusTest
             this.wumpusLocation = wumpusLocation;
             this.batsLocations = batsLocations;
             this.bottomlesspitLocations = bottomlesspitLocations;
-            cave = new Cave();
+            cave = new Cave(1);
+            arrayOfRooms = cave.getRoomConnections();
         }
-        public void movesForward(int room_number)
+        public void updatePlayerLocation(int user_input)
         {
-            playerLocation = room_number;
-            //updates player location
+            int[] surroundingRooms = new int[6];
+            //Creates an array to get surrounding rooms to the player location
+            for (int i = 0; i < surroundingRooms.Length; i++)
+            {
+                surroundingRooms[i] = Math.Abs(arrayOfRooms[playerLocation - 1, i]);
+                //transfers data from connections 2D Array to surroundingRooms
+            }
+            playerLocation = surroundingRooms[(user_input + 1) % 6];
         }
         public int encounterHazard()
         {
@@ -94,46 +103,29 @@ namespace WumpusTest
             //Same algorithm for the bottomless pits
             //array will look like [(isWumpusCloseTrueOrFalse), (isABatCloseTrueOrFalse), (isTheOtherBatCloseTrueOrFalse), 
             //(is theBottomLessPitCloseTrueOrFalse, IsTheOtherBottomLessPitCloseTrueOrFalse)
-            bool[] hazards = new bool[5];
+            bool[] hazards = { false, false, false, false, false };
             if(distanceBetweenRooms(playerLocation, wumpusLocation) == true)
             {
                 hazards[0] = true;
-            }
-            else
-            {
-                hazards[0] = false;
             }
             if(distanceBetweenRooms(playerLocation, batsLocations[0]) == true)
             {
                 hazards[1] = true;
             }
-            else
-            {
-                hazards[1] = false;
-            }
+        
             if (distanceBetweenRooms(playerLocation, batsLocations[1]) == true)
             {
                 hazards[2] = true;
             }
-            else
-            {
-                hazards[2] = false;
-            }
+           
             if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[0]) == true)
             {
                 hazards[3] = true;
             }
-            else
-            {
-                hazards[3] = false;
-            }
+            
             if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[1]) == true)
             {
                 hazards[4] = true;
-            }
-            else
-            {
-                hazards[4] = false;
             }
             return hazards;
         }
@@ -153,10 +145,58 @@ namespace WumpusTest
         {
             return bottomlesspitLocations;
         }
+        public int[,] getConnections()
+        {
+            return arrayOfRooms;
+        }
+        public void setPlayerLocation(int playerLocation)
+        {
+            this.playerLocation = playerLocation;
+        }
+        public void setWumpusLocation(int wumpusLocation)
+        {
+            this.wumpusLocation = wumpusLocation;
+        }
+        public void setBatsLocations(int[] batsLocations)
+        {
+            for (int i = 0; i < batsLocations.Length; i++)
+            {
+                this.batsLocations[i] = batsLocations[i];
+            }
+        }
+        public void setBottomLessPitsLocations(int[] bottomlesspitLocations)
+        {
+            for (int i = 0; i < bottomlesspitLocations.Length; i++)
+            {
+                this.bottomlesspitLocations[i] = bottomlesspitLocations[i];
+            }
+        }
+        public bool isWumpusInRoom(int user_input)
+        {
+            //This method checks if an arrow
+            //that the user shoots hits the
+            //wumpus. If it does the method 
+            //returns true, or the method
+            //returns false
+            bool wumpus = false;
+            //Sets the return variable to valse
+            int[] surroundingRooms = new int[6];
+            //Creates an array to get surrounding rooms to the player location
+            for (int i = 0; i < surroundingRooms.Length; i++)
+            {
+                surroundingRooms[i] = Math.Abs(arrayOfRooms[playerLocation - 1, i]);
+                //transfers data from connections 2D Array to surroundingRooms
+            }
+            if (wumpusLocation == surroundingRooms[(user_input + 1) % 6])
+            {
+                wumpus = true;
+            } 
+            return wumpus;
+        }
         public bool distanceBetweenRooms(int room1, int room2)
         {
             //If distance between rooms is equal to 1, or 2 returns true
-            int[,] arrayOfRooms = cave.getRoomConnections();
+          
             //Gets room connection array from cave
             int[] roomArray = new int[6];
             //Creates connection array for first room
@@ -231,4 +271,5 @@ namespace WumpusTest
             return hazard;
         }
     }
+
 }
