@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,12 +21,15 @@ namespace WumpusTest
         private String question;
         private String[] answers;
 
+        private bool qStatus;
+
         //constructor - initializes all objects
         public GameControl()
         {
             //initialization
             render = new InGameRenderInfo();
             render.IsGameOver = false;
+            render.CaveConnections = map.getConnections();
             trivia = new Trivia();
             scores = new HighScore();
             map = new Map();
@@ -42,13 +45,13 @@ namespace WumpusTest
             return render;
         }
         
-        public startGame(){
+        public void startGame(){
 
         }
 
         //logs the high score if it is one, then ends game
         private void endGame()
-        {
+        { 
             //TODO create a calculate score function here
             //TODO high score method should write a score if it is a high score
 
@@ -60,24 +63,11 @@ namespace WumpusTest
              */
         }
 
-        //shoots an arrow at specified room
-        private bool shoot(int room)
+        //encounters a hazard and asks questions accordingly 
+        private void encounterHazard(int hazard)
         {
 
-            if (player.getNumOfArrows() > 0)
-            {
-                player.updateInventory(-1, 0);
-                if (map.hasWumpus(room))
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            ////TODO remove this
-            return true;
         }
-
         //moves the Player
         public InGameRenderInfo movePlayer(int room)
         {
@@ -94,28 +84,60 @@ namespace WumpusTest
             return render;
         }
 
-        public buyArrows(){
-
-        }
-        //encounters a hazard and asks questions accordingly 
-        private void encounterHazard(int hazard)
+        public InGameRenderInfo buyArrows(String[] playerChoice, int numOfQ)
         {
 
+            if (checkAnswer(playerChoice, numOfQ))
+            {
+                player.updateInventory(2, 0);
+            }
+            return updateInfo();
+        }
+
+        //shoots an arrow at specified room
+        public bool shoot(int room)
+        {
+
+            if (player.getNumOfArrows() > 0)
+            {
+                player.updateInventory(-1, 0);
+                if (map.hasWumpus(room))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         //asks a question
-        private void updateQuestion()
+        public void updateQuestion(int numOfQ)
         {
-            question = trivia.getQuestion();
-            answers = trivia.getPossibleAnswers();
+            for (int i = 0; i < numOfQ; i++)
+            {
+                render.question[i] = trivia.getQuestion();
+                render.answers[i] = trivia.getPossibleAnswers();
+            }
+            render.numOfQuestions = numOfQ;
+            render.askQuestion = true;
         }
 
-        private Boolean checkAnswer(int playerChoice)
+        public Boolean checkAnswer(String[] playerChoice, int numOfQ)
         {
-            ////TODO UI needs to get an answer from the player and return as char
-            if (trivia.isAnswerCorrect(answers[playerChoice]))
+            int correct = 0;
+            for (int i = 0; i < numOfQ; i++)
             {
-                updateQuestion();
+                if (playerChoice[i] == render.answers[i][5])
+                {
+                    correct++;
+                }
+                else
+                {
+                    correct--;
+                }
+            }
+            render.askQuestion = false;
+            if (correct > 0)
+            {
                 return true;
             }
             return false;

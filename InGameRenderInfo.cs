@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,8 @@ namespace WumpusTest
     {
         //is game over
         public bool IsGameOver;
+
+        public int numberOfTurns;
 
         //displayed num of arrows
         public int ArrowCount;
@@ -23,7 +25,8 @@ namespace WumpusTest
         //whether or not a question should be asked
         public Boolean askQuestion;
         //question and answers - input goes to control
-        public String question;
-        public String[] answers;
+        public int numOfQuestions;
+        public String[] question;
+        public String[][] answers;
     }
 }
