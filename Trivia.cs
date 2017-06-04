@@ -4,26 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApplication1
+namespace WumpusTest
+
 {
     class Trivia
     {
         private string question;
-        private Boolean[] elimQuestions;
+        private static Boolean[] elimQuestions = new Boolean[20];
         private string[] questionArr;
         private string[] stringArray;
-        private int NumQuestions = 0;
-        private Random r;
 
         public Trivia()
         {
-            elimQuestions = new Boolean[20];
-            r = new Random();
             //Reads files and assorts lines into array
-            questionArr = System.IO.File.ReadAllLines(@"E:\WumpusTest\TriviaQuestions.txt"); //change according to file location
+            questionArr = System.IO.File.ReadAllLines(@"TriviaQuestions.txt");
             //Sets first question as current question
             question = questionArr[0];
             stringArray = question.Split(';');
+            for(int i = 0; i < elimQuestions.Length; i++)
+            {
+                elimQuestions[i] = false;
+            }
         }
         public string getQuestion()
         {
@@ -40,18 +41,21 @@ namespace WindowsFormsApplication1
         public string[] getPossibleAnswers() 
         {
             //returns answer choices as a string array
-            string[] returnArray = new string[4];
-            for (int i = 1; i < 5; i++)
+            string[] returnArray = new string[5];
+
+            for (int i = 0; i < 5; i++)
             {
-                returnArray[i - 1] = stringArray[i];
+                returnArray[i] = stringArray[i+1];
             }
             return returnArray; 
         }
 
         public void newQuestion()
         {
+            Random r = new Random();
             //randomizes question 
             int q = r.Next(20);
+
             while (elimQuestions[q] != false)
             {
                 q = r.Next(20);
@@ -61,16 +65,6 @@ namespace WindowsFormsApplication1
             //sets new question and answers as current question and answer
             question = questionArr[q];
             stringArray = question.Split(';');
-            NumQuestions++;
-            //resets questions if all are answered - meant to prevent crashing
-            if (NumQuestions == 20)
-            {
-                for (int i = 0; i < elimQuestions.Length; i++)
-                {
-                    elimQuestions[i] = false;
-                }
-                NumQuestions = 0;
-            }
         }
 
         public Boolean isAnswerCorrect(String answer)
@@ -78,12 +72,10 @@ namespace WindowsFormsApplication1
             //Determines if answer is correct for game control
             if (stringArray[5] == answer)
             {
-                newQuestion();
                 return true;
             }
             else
             {
-                newQuestion();
                 return false;
             }
         }

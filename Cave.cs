@@ -9,32 +9,37 @@ namespace WumpusTest
     class Cave
     {
 
-        private static int[,] x1 = new int[30, 6];
+        private static int[,] pathways = new int[30, 6];
 
         public Cave(int a)
         {
-            if (a == 1)
+            string FileName = "Cave" + a + ".txt";
+            string[] stPathways = System.IO.File.ReadAllLines(@"" +FileName);
+            //reads from any file
+            if (stPathways == null)
             {
-                String FileName = "Cave" + a + ".txt";
-                System.IO.StreamReader file = new System.IO.StreamReader(@"\Projects\WumpusTestV2\WumpusTestV2\" + FileName);
-                while (file.ReadLine() != null)
+                throw new IOException("Unable to read from file");
+                //checks if this is null and throws exception if found
+            }
+            else
+            {
+
+                int[,] temporaryPathways = new int[30, 6];
+                for (int i = 0; i < 30; i++)
                 {
-                    int[,] x = new int[30, 6];
-                    for (int i = 0; i < 30; i++)
+                    var entries = stPathways[i].Split(' ');
+                    for (int j = 0; j < 6; j++)
                     {
-                        String[] st = file.ReadLine().Split(' ');
-                        for (int j = 0; j < 6; j++)
-                        {
-                            x[i, j] = int.Parse(st[i]);
-                        }
+                        temporaryPathways[i, j] = int.Parse(entries[j]);
                     }
-                    x1 = x;
                 }
+                pathways = temporaryPathways;
             }
         }
+
         public int[,] getRoomConnections()
         {
-            return x1;
+            return pathways;
         }
     }
 }

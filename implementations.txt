@@ -1,0 +1,22 @@
+Absolutely Necessary
+
+-Implement hazard resolution (Matthew) #1
+-Implement purchasing arrows (Anshul)  #4
+-Implement purchasing secrets (Anshul) #3
+-Implement high score (Matthew)  
+-Implement score display (Anshul) Done 
+-Display room, player, and hazard/wumpus pics (Jayanth) #2
+-Make UI look better (Anshul) 
+-Implement player name creation (Anshul)
+-Finish implementing Wumpus behavior (Anshul)
+-Implement gold cap (Anshul)
+-Implement shooting arrows (Anshul)
+
+Additional Features to Add
+-Implement minimap
+-Implement save/load button
+
+Things to do at end
+- Make methods not used outside of object private
+- Delete unnecessary methods	 
+- Tooltips
