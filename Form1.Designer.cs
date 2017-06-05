@@ -60,11 +60,25 @@ namespace WumpusTest
             this.batPicture = new System.Windows.Forms.PictureBox();
             this.playerImage = new System.Windows.Forms.PictureBox();
             this.tutorialButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.shootArrowPanel = new System.Windows.Forms.Panel();
+            this.room6 = new System.Windows.Forms.Button();
+            this.room3 = new System.Windows.Forms.Button();
+            this.room4 = new System.Windows.Forms.Button();
+            this.room5 = new System.Windows.Forms.Button();
+            this.room2 = new System.Windows.Forms.Button();
+            this.room1 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wumpusPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pitPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerImage)).BeginInit();
+            this.shootArrowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -264,7 +278,7 @@ namespace WumpusTest
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(127, 0);
+            this.label3.Location = new System.Drawing.Point(6, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(264, 175);
@@ -346,7 +360,7 @@ namespace WumpusTest
             this.textDisplay.BackColor = System.Drawing.Color.Transparent;
             this.textDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textDisplay.ForeColor = System.Drawing.Color.White;
-            this.textDisplay.Location = new System.Drawing.Point(690, -2);
+            this.textDisplay.Location = new System.Drawing.Point(13, 411);
             this.textDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.textDisplay.Name = "textDisplay";
             this.textDisplay.Size = new System.Drawing.Size(582, 217);
@@ -365,7 +379,7 @@ namespace WumpusTest
             this.purchaseArrow.Name = "purchaseArrow";
             this.purchaseArrow.Size = new System.Drawing.Size(322, 57);
             this.purchaseArrow.TabIndex = 13;
-            this.purchaseArrow.Text = "Purchase Arrows";
+            this.purchaseArrow.Text = "Purchase Arrow";
             this.purchaseArrow.UseVisualStyleBackColor = false;
             this.purchaseArrow.Click += new System.EventHandler(this.purchaseArrow_Click);
             // 
@@ -414,7 +428,7 @@ namespace WumpusTest
             this.turnLabel.ForeColor = System.Drawing.Color.White;
             this.turnLabel.Location = new System.Drawing.Point(1506, 107);
             this.turnLabel.Name = "turnLabel";
-            this.turnLabel.Size = new System.Drawing.Size(281, 30);
+            this.turnLabel.Size = new System.Drawing.Size(297, 30);
             this.turnLabel.TabIndex = 17;
             this.turnLabel.Text = "Number Of Turns: ";
             // 
@@ -430,6 +444,7 @@ namespace WumpusTest
             this.shootArrow.TabIndex = 18;
             this.shootArrow.Text = "Shoot Arrow";
             this.shootArrow.UseVisualStyleBackColor = false;
+            this.shootArrow.Click += new System.EventHandler(this.shootArrow_Click);
             // 
             // wumpusPicture
             // 
@@ -450,9 +465,10 @@ namespace WumpusTest
             // 
             this.pitPicture.BackColor = System.Drawing.Color.Transparent;
             this.pitPicture.Image = ((System.Drawing.Image)(resources.GetObject("pitPicture.Image")));
-            this.pitPicture.Location = new System.Drawing.Point(749, 609);
+            this.pitPicture.Location = new System.Drawing.Point(766, 648);
             this.pitPicture.Name = "pitPicture";
-            this.pitPicture.Size = new System.Drawing.Size(243, 90);
+            this.pitPicture.Size = new System.Drawing.Size(226, 90);
+            this.pitPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pitPicture.TabIndex = 22;
             this.pitPicture.TabStop = false;
             // 
@@ -465,7 +481,7 @@ namespace WumpusTest
             this.batPicture.Image = ((System.Drawing.Image)(resources.GetObject("batPicture.Image")));
             this.batPicture.Location = new System.Drawing.Point(812, 397);
             this.batPicture.Name = "batPicture";
-            this.batPicture.Size = new System.Drawing.Size(201, 162);
+            this.batPicture.Size = new System.Drawing.Size(197, 162);
             this.batPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.batPicture.TabIndex = 23;
             this.batPicture.TabStop = false;
@@ -474,7 +490,7 @@ namespace WumpusTest
             // 
             this.playerImage.BackColor = System.Drawing.Color.Transparent;
             this.playerImage.Image = ((System.Drawing.Image)(resources.GetObject("playerImage.Image")));
-            this.playerImage.Location = new System.Drawing.Point(749, 591);
+            this.playerImage.Location = new System.Drawing.Point(766, 601);
             this.playerImage.Name = "playerImage";
             this.playerImage.Size = new System.Drawing.Size(243, 147);
             this.playerImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -495,6 +511,161 @@ namespace WumpusTest
             this.tutorialButton.UseVisualStyleBackColor = false;
             this.tutorialButton.Click += new System.EventHandler(this.tutorialButton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(720, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 17);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Wumpus: ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(720, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Pit 1: ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(720, 52);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 17);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Pit 2: ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(720, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 17);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Bat 1:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(720, 99);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 17);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Bat 2: ";
+            // 
+            // shootArrowPanel
+            // 
+            this.shootArrowPanel.BackColor = System.Drawing.Color.SandyBrown;
+            this.shootArrowPanel.Controls.Add(this.room6);
+            this.shootArrowPanel.Controls.Add(this.room3);
+            this.shootArrowPanel.Controls.Add(this.room4);
+            this.shootArrowPanel.Controls.Add(this.room5);
+            this.shootArrowPanel.Controls.Add(this.room2);
+            this.shootArrowPanel.Controls.Add(this.room1);
+            this.shootArrowPanel.Controls.Add(this.label10);
+            this.shootArrowPanel.Location = new System.Drawing.Point(707, 273);
+            this.shootArrowPanel.Name = "shootArrowPanel";
+            this.shootArrowPanel.Size = new System.Drawing.Size(773, 500);
+            this.shootArrowPanel.TabIndex = 32;
+            this.shootArrowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.shootArrowPanel_Paint);
+            // 
+            // room6
+            // 
+            this.room6.AutoSize = true;
+            this.room6.BackColor = System.Drawing.Color.SandyBrown;
+            this.room6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room6.ForeColor = System.Drawing.Color.White;
+            this.room6.Location = new System.Drawing.Point(462, 232);
+            this.room6.Name = "room6";
+            this.room6.Size = new System.Drawing.Size(120, 46);
+            this.room6.TabIndex = 6;
+            this.room6.Text = "6";
+            this.room6.UseVisualStyleBackColor = false;
+            this.room6.Click += new System.EventHandler(this.room6_Click_1);
+            // 
+            // room3
+            // 
+            this.room3.AutoSize = true;
+            this.room3.BackColor = System.Drawing.Color.SandyBrown;
+            this.room3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room3.ForeColor = System.Drawing.Color.White;
+            this.room3.Location = new System.Drawing.Point(113, 185);
+            this.room3.Name = "room3";
+            this.room3.Size = new System.Drawing.Size(120, 46);
+            this.room3.TabIndex = 5;
+            this.room3.Text = "3";
+            this.room3.UseVisualStyleBackColor = false;
+            this.room3.Click += new System.EventHandler(this.room3_Click_1);
+            // 
+            // room4
+            // 
+            this.room4.AutoSize = true;
+            this.room4.BackColor = System.Drawing.Color.SandyBrown;
+            this.room4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room4.ForeColor = System.Drawing.Color.White;
+            this.room4.Location = new System.Drawing.Point(113, 232);
+            this.room4.Name = "room4";
+            this.room4.Size = new System.Drawing.Size(120, 46);
+            this.room4.TabIndex = 4;
+            this.room4.Text = "4";
+            this.room4.UseVisualStyleBackColor = false;
+            this.room4.Click += new System.EventHandler(this.room4_Click_1);
+            // 
+            // room5
+            // 
+            this.room5.AutoSize = true;
+            this.room5.BackColor = System.Drawing.Color.SandyBrown;
+            this.room5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room5.ForeColor = System.Drawing.Color.White;
+            this.room5.Location = new System.Drawing.Point(462, 185);
+            this.room5.Name = "room5";
+            this.room5.Size = new System.Drawing.Size(120, 46);
+            this.room5.TabIndex = 3;
+            this.room5.Text = "5";
+            this.room5.UseVisualStyleBackColor = false;
+            this.room5.Click += new System.EventHandler(this.room5_Click_1);
+            // 
+            // room2
+            // 
+            this.room2.AutoSize = true;
+            this.room2.BackColor = System.Drawing.Color.SandyBrown;
+            this.room2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room2.ForeColor = System.Drawing.Color.White;
+            this.room2.Location = new System.Drawing.Point(462, 138);
+            this.room2.Name = "room2";
+            this.room2.Size = new System.Drawing.Size(120, 46);
+            this.room2.TabIndex = 2;
+            this.room2.Text = "2";
+            this.room2.UseVisualStyleBackColor = false;
+            this.room2.Click += new System.EventHandler(this.room2_Click_1);
+            // 
+            // room1
+            // 
+            this.room1.AutoSize = true;
+            this.room1.BackColor = System.Drawing.Color.SandyBrown;
+            this.room1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room1.ForeColor = System.Drawing.Color.White;
+            this.room1.Location = new System.Drawing.Point(113, 138);
+            this.room1.Name = "room1";
+            this.room1.Size = new System.Drawing.Size(120, 46);
+            this.room1.TabIndex = 1;
+            this.room1.Text = "1";
+            this.room1.UseVisualStyleBackColor = false;
+            this.room1.Click += new System.EventHandler(this.room1_Click_1);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(190, 92);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(343, 36);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Shoot Arrow Into Room: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -503,6 +674,12 @@ namespace WumpusTest
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1898, 1029);
+            this.Controls.Add(this.shootArrowPanel);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.tutorialButton);
             this.Controls.Add(this.playerImage);
             this.Controls.Add(this.batPicture);
@@ -540,6 +717,8 @@ namespace WumpusTest
             ((System.ComponentModel.ISupportInitialize)(this.pitPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerImage)).EndInit();
+            this.shootArrowPanel.ResumeLayout(false);
+            this.shootArrowPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -586,6 +765,19 @@ namespace WumpusTest
         private System.Windows.Forms.PictureBox batPicture;
         private System.Windows.Forms.PictureBox playerImage;
         private System.Windows.Forms.Button tutorialButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel shootArrowPanel;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button room6;
+        private System.Windows.Forms.Button room3;
+        private System.Windows.Forms.Button room4;
+        private System.Windows.Forms.Button room5;
+        private System.Windows.Forms.Button room2;
+        private System.Windows.Forms.Button room1;
     }
 }
 
