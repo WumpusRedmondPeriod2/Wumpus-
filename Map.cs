@@ -58,8 +58,6 @@ namespace WumpusTest
             wumpus = new Wumpus();
             Debug.WriteLine("player location: " + playerLocation);
             Debug.WriteLine("wumpus location: " + wumpusLocation);
-            beenInRoom = new bool[30];
-            //beenInRoom[playerLocation - 1] = true;
             arrayOfRooms = cave.getRoomConnections();
             player = new Player();
            
@@ -109,7 +107,7 @@ namespace WumpusTest
                 //transfers data from connections 2D Array to surroundingRooms
             }
             playerLocation = surroundingRooms[(user_input - 1)];
-            beenInRoom[playerLocation - 1] = true; //sets corresponding element in bool array to true 
+           //sets corresponding element in bool array to true 
             //to indicated user has visited room
 
             return playerLocation;
@@ -147,11 +145,6 @@ namespace WumpusTest
             wumpusLocation = surroundingRooms[gen.Next(countOfPositives)];
             return wumpusLocation;
         }
-        public bool roomState()
-        {
-            //this method checks if the user has been in a room before
-            return beenInRoom[playerLocation - 1];
-        }
         public int moveRandomRoom()
         {
             Random gen = new Random();
@@ -168,7 +161,7 @@ namespace WumpusTest
             //works
             //returns 0 if no hazards encountered
             //returns 1 if bats
-            //returns 2 if bottmoless pit
+            //returns 2 if bottomless pit
             //return 3 if wumpus
             if (playerLocation == wumpusLocation)
             {
