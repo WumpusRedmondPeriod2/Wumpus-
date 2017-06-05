@@ -156,6 +156,18 @@ namespace WumpusTest
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
+            if(toMoveToRandom == playerLocation)
+            {
+                playerLocation = newLocation;
+            }
+            else if(toMoveToRandom == batsLocations[0])
+            {
+                batsLocations[0] = newLocation;
+            }
+            else if(toMoveToRandom == batsLocations[1])
+            {
+                batsLocations[1] = newLocation;
+            }
             return newLocation;
         }
         public int encounterHazard()
