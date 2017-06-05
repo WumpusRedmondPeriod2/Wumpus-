@@ -25,7 +25,7 @@ namespace WumpusTest
         {
             string line;
             int count = 0;
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\s-igraham\Documents\Visual Studio 2013\Projects\WumpusTest\WumpusTest\HighScoreDoc.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"HighScoreDoc.txt");
             while ((line = file.ReadLine()) != null && count < 5)
             {
                 string[] splitLine = null;
@@ -64,7 +64,7 @@ namespace WumpusTest
             }
             for (int i = 0; i < 5; i++)
             {
-                System.IO.StreamWriter write = new System.IO.StreamWriter(@"C:\Users\s-igraham\Documents\Visual Studio 2013\Projects\WumpusTest\WumpusTest\HighScoreDoc.txt");
+                System.IO.StreamWriter write = new System.IO.StreamWriter(@"HighScoreDoc.txt");
                 write.Write(names[i] + " " + scores[i] + "\n");
             }
         }
