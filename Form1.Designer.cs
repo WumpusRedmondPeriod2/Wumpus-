@@ -448,8 +448,8 @@ namespace WumpusTest
             // 
             // wumpusPicture
             // 
-            this.wumpusPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.wumpusPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wumpusPicture.BackColor = System.Drawing.Color.Transparent;
             this.wumpusPicture.Image = ((System.Drawing.Image)(resources.GetObject("wumpusPicture.Image")));
@@ -474,8 +474,8 @@ namespace WumpusTest
             // 
             // batPicture
             // 
-            this.batPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.batPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.batPicture.BackColor = System.Drawing.Color.Transparent;
             this.batPicture.Image = ((System.Drawing.Image)(resources.GetObject("batPicture.Image")));
@@ -733,7 +733,7 @@ namespace WumpusTest
         {
             throw new NotImplementedException();
         }
-        
+
 
         #endregion
         private System.Windows.Forms.Button button1;
@@ -780,4 +780,5 @@ namespace WumpusTest
         private System.Windows.Forms.Button room1;
     }
 }
+
 

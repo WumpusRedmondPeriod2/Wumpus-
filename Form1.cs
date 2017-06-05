@@ -14,7 +14,7 @@ namespace WumpusTest
         private int cavenum;
         public Form1(int cavenum)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             game = new GameControl(cavenum);
             playerChoice = new String[game.render.numOfQuestions];
             this.cavenum = cavenum;
@@ -43,7 +43,7 @@ namespace WumpusTest
         }
         private void implementHazardPics(InGameRenderInfo info)
         {
-            if(info.roomNum == info.wumpusLocation)
+            if (info.roomNum == info.wumpusLocation)
             {
                 wumpusPicture.Visible = true;
             }
@@ -51,7 +51,7 @@ namespace WumpusTest
             {
                 wumpusPicture.Visible = false;
             }
-            if(info.roomNum == info.pitlocation1 || info.roomNum == info.pitlocation2)
+            if (info.roomNum == info.pitlocation1 || info.roomNum == info.pitlocation2)
             {
                 pitPicture.Visible = true;
                 playerImage.Visible = false;
@@ -61,7 +61,7 @@ namespace WumpusTest
                 playerImage.Visible = true;
                 pitPicture.Visible = false;
             }
-            if(info.roomNum == info.batlocation1 || info.roomNum == info.batlocation2)
+            if (info.roomNum == info.batlocation1 || info.roomNum == info.batlocation2)
             {
                 batPicture.Visible = true;
             }
@@ -87,7 +87,7 @@ namespace WumpusTest
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void RenderScene(InGameRenderInfo info)
         {
@@ -190,12 +190,13 @@ namespace WumpusTest
         {
             label2.Text = "Arrow Count: " + game.render.ArrowCount;
         }
-        private void move(int room){
+        private void move(int room)
+        {
             game.updateTurns();
             game.movePlayer(room);
             game.moveCheck();
-            renderQuestion(game.render);
             RenderScene(game.render);
+            renderQuestion(game.render);
         }
         private void Room1_Click(object sender, EventArgs e)
         {
@@ -300,7 +301,7 @@ namespace WumpusTest
         private void disableButtons()
         {
             button1.Enabled = false;
-            button2.Enabled = false;            
+            button2.Enabled = false;
             button3.Enabled = false;
             button4.Enabled = false;
             button5.Enabled = false;
@@ -335,7 +336,7 @@ namespace WumpusTest
         }
         private void Form1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            
+
             int mouseX = e.X;
             int mouseY = e.Y;
 
@@ -408,7 +409,7 @@ namespace WumpusTest
                 radioButton4.Checked = false;
                 EnterButton.Text = "Enter";
             }
-            
+
 
         }
 
@@ -597,11 +598,10 @@ namespace WumpusTest
         }
         private void resolveConflictWithWumpus(bool shot)
         {
-            if(shot == true)
+            if (shot == true)
             {
                 this.Hide();
                 game.updatePop(8);
-                renderPop(game.render);
                 var form1 = new EndGame(game.render.score);
                 form1.Closed += (s, args) => this.Close();
                 form1.Show();
@@ -609,11 +609,11 @@ namespace WumpusTest
             else
             {
                 game.updatePop(9);
-                renderPop(game.render);
             }
         }
     }
 }
+
 
 
 

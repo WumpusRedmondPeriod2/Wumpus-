@@ -57,8 +57,6 @@ namespace WumpusTest
             num.Remove(index);
             cave = new Cave(cavenum);
             wumpus = new Wumpus();
-            Debug.WriteLine("player location: " + playerLocation);
-            Debug.WriteLine("wumpus location: " + wumpusLocation);
             arrayOfRooms = cave.getRoomConnections();
             player = new Player();
         }

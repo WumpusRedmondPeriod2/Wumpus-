@@ -62,7 +62,7 @@ namespace WumpusTest
             CaveConnections = new int[0,0];
             numOfQuestions = 0;
             question = new String[0];
-            answers = new String[0][];            
+            answers = new String[0][];
             popUp = new ArrayList(0);
         }
     }
