@@ -106,7 +106,7 @@ namespace WumpusTest
                 //transfers data from connections 2D Array to surroundingRooms
             }
             playerLocation = surroundingRooms[(user_input - 1)];
-           //sets corresponding element in bool array to true 
+            //sets corresponding element in bool array to true 
             //to indicated user has visited room
 
             return playerLocation;
@@ -115,13 +115,13 @@ namespace WumpusTest
         {
             //moves the wumpus if arrow shot by user misses the wumpus
             //or if the wumpus is defeated in trivia
-            int[] numOfRooms = { 2, 3, 4 }; 
+            int[] numOfRooms = { 2, 3, 4 };
             wumpus.setAsleep(false);
             Random gen = new Random();
             int numOfRoomsMoved = numOfRooms[gen.Next(numOfRooms.Length)];
             for (int i = 1; i <= numOfRoomsMoved; i++)
             {
-                 moveWumpus();
+                moveWumpus();
             }
         }
         public void moveWumpus()
@@ -140,10 +140,10 @@ namespace WumpusTest
             }
             wumpusLocation = surroundingRooms[gen.Next(countOfPositives)];
         }
-        public int moveRandomRoom(int toMoveToRandom)
+        public void movePlayerRandom()
         {
             ArrayList roomNumbers = new ArrayList();
-            for(int i = 1; i <= 30; i++)
+            for (int i = 1; i <= 30; i++)
             {
                 roomNumbers.Add(i);
             }
@@ -152,23 +152,32 @@ namespace WumpusTest
             roomNumbers.Remove(batsLocations[0] - 1);
             roomNumbers.Remove(batsLocations[1] - 1);
             roomNumbers.Remove(playerLocation - 1);
-            roomNumbers.Remove(toMoveToRandom - 1);
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
-            if(toMoveToRandom == playerLocation)
+            playerLocation = newLocation;
+        }
+        public void moveBatRandom()
+        {
+            ArrayList roomNumbers = new ArrayList();
+            for (int i = 1; i <= 30; i++)
             {
-                playerLocation = newLocation;
+                roomNumbers.Add(i);
             }
-            else if(toMoveToRandom == batsLocations[0])
+            roomNumbers.Remove(bottomlesspitLocations[0] - 1);
+            roomNumbers.Remove(bottomlesspitLocations[1] - 1);
+            roomNumbers.Remove(batsLocations[0] - 1);
+            roomNumbers.Remove(batsLocations[1] - 1);
+            roomNumbers.Remove(playerLocation - 1);
+            Random gen = new Random();
+            int index = gen.Next(roomNumbers.Count);
+            int newLocation = (int)roomNumbers[index];
+            if (batsLocations[0] == playerLocation)
             {
                 batsLocations[0] = newLocation;
+                return;
             }
-            else if(toMoveToRandom == batsLocations[1])
-            {
-                batsLocations[1] = newLocation;
-            }
-            return newLocation;
+            batsLocations[1] = newLocation;
         }
         public int encounterHazard()
         {
