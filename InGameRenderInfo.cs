@@ -19,7 +19,14 @@ namespace WumpusTest
 
         //0 - none, 1 - bats, 2 - pit, 3 - wumpus
         //resolution: 4- pit true, 5 - pit false, 6 - wumpus true, 7 - wumpus false
-        public int popUp;
+        // 8- hit arrow, 9 - missed arrow
+        public ArrayList popUp;
+
+        public int wumpusLocation;
+        public int batlocation1;
+        public int batlocation2;
+        public int pitlocation1;
+        public int pitlocation2;
 
         public int numberOfTurns;
         public int roomNum;
@@ -45,11 +52,12 @@ namespace WumpusTest
         {
             IsGameOver = true;
             isHazard = 0;
+            wumpusLocation = 0;
             warnings = new ArrayList(0);
             roomNum = -1;
             numberOfTurns = 0;
             ArrowCount = 0;
-            GoldCount = 0;;
+            GoldCount = 0;
             askQuestion = false;
             CaveConnections = new int[0,0];
             numOfQuestions = 0;

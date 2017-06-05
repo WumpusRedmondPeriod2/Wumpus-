@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//3.8.2017 - updated stubbed methods
 
 namespace WumpusTest
 {
@@ -18,7 +17,8 @@ namespace WumpusTest
       //  private HighScore scores;
         private Map map;
         private Player player;
-        private int cavenum;       
+        private int cavenum;
+        int reason = 0;
         //constructor - initializes all objects
         public GameControl(int cavenum)
         {
@@ -35,9 +35,9 @@ namespace WumpusTest
             render.CaveConnections = map.getConnections();
               trivia = new Trivia();
             //   scores = new HighScore();
-
             player = new Player();
             render.currentPaths = map.getCurrentConnections(map.getPlayerLocation());
+            reason = 0;
             updateRender();
         }
         public void updateTurns()
@@ -70,16 +70,39 @@ namespace WumpusTest
             }
              */
         }
-
+        
         public void updatePop(int message)
         {
-            render.popUp = message;
+            render.popUp.Add(message);
+        }
+        public void resetPop()
+        {
+            render.popUp = new ArrayList();
         }
         public ArrayList returnSecrets()
         {
            ArrayList secrets = map.returnSecrets();
            
            return secrets;
+        }
+
+        public void encounterBats()
+        {
+            map.moveBatRandom();
+            map.movePlayerRandom();
+            resetPop();
+            updatePop(1);
+            updateRender();
+        }
+        public void encounterPit()
+        {
+            updateQuestion(3);
+            reason = 2;
+        }
+        public void encounterWumpus()
+        {
+            updateQuestion(5);
+            reason = 3;
         }
         //encounters a hazard and asks questions accordingly 
         private InGameRenderInfo encounterHazard(int hazard)
@@ -90,59 +113,21 @@ namespace WumpusTest
                 case 1:
                     break;
                 case 2:
-                    updateQuestion(3);
+                    encounterPit();
                     break;
                 case 3:
-                    updateQuestion(5);
+                    encounterWumpus();
                     break;
             }
             return render;
         }
-      
-        //TODO
-        public InGameRenderInfo responseHazard(int hazard)
-        {
-            updatePop(0);
-            if (render.correct)
-            {
-                switch (hazard)
-                {
-                    case 1:
-                        break;
-                    case 2:
-                        map.moveToInitial();
-                        updatePop(4);
-                        break;
-                    case 3:
-                        updatePop(6);
-                        map.moveWumpusAway();
-                        break;
-                }
-            }
-            else
-            {
-                switch (hazard)
-                {
-                    case 2:
-                        updatePop(5);
-                        endGame(1);
-                        break;
-                    case 3:
-                        updatePop(7);
-                        endGame(2);
-                        break;
-                }
-            }
-
-            updateRender();
-            return render;
-            
-        }        
+         
         //moves the Player
         public InGameRenderInfo movePlayer(int room)
         {
+            resetPop();
             //player gets gold, updates render for UI
-            player.updateInventory(0, 1);
+            player.incGold();
             //updates location of player
             map.updatePlayerLocation(room);
             updateRender();
@@ -160,9 +145,37 @@ namespace WumpusTest
             return render;
         }
 
+        public bool[] hazards()
+        {
+            //returns a bool array
+            //First element indicates presence of wumpus in rooms
+            //subsequent elements indicate presence of pits or bats
+            bool[] hazards = new bool[3];
+            if (map.encounterHazard() == 3)
+            {
+                hazards[0] = true;
+            }
+            if (map.encounterHazard() == 2)
+            {
+                hazards[1] = true;
+            }
+            if (map.encounterHazard() == 0)
+            {
+                hazards[2] = true;
+            }
+            return hazards;
+        }
+
         public InGameRenderInfo updateRender()
         {
             render.warnings = map.checkForHazards();
+            render.wumpusLocation = map.getWumpusLocation();
+            int[] pitlocations = map.getBottomLessPitLocations();
+            int[] batlocations = map.getBatsLocations();
+            render.pitlocation1 = pitlocations[0];
+            render.pitlocation2 = pitlocations[1];
+            render.batlocation1 = batlocations[0];
+            render.batlocation2 = batlocations[1];
             render.currentPaths = map.getCurrentConnections(map.getPlayerLocation());
             render.ArrowCount = player.getNumOfArrows();
             render.GoldCount = player.getGold();
@@ -172,14 +185,12 @@ namespace WumpusTest
             return render;
         }
 
-        public InGameRenderInfo buyArrows(String[] playerChoice, int numOfQ)
+        public InGameRenderInfo buyArrows()
         {
-
-            if (checkAnswer(playerChoice, numOfQ))
-            {
-                player.updateInventory(2, 0);
-            }
-            return updateRender();
+            updateQuestion(3);
+            reason = 1;
+            updateRender();
+            return render;
         }
 
         //shoots an arrow at specified room
@@ -196,10 +207,10 @@ namespace WumpusTest
             }
             return false;
         }
-        
         //asks a question
         public void updateQuestion(int numOfQ)
         {
+            render.correct = false;
             render.question = new String[numOfQ];
             render.answers = new String[numOfQ][];
             for (int i = 0; i < numOfQ; i++)
@@ -211,9 +222,7 @@ namespace WumpusTest
             render.numOfQuestions = numOfQ;
             render.askQuestion = true;
         }
-        
-
-        public Boolean checkAnswer(String[] playerChoice, int numOfQ)
+        public void checkAnswer(String[] playerChoice, int numOfQ)
         {
             int correct = 0;
             for (int i = 0; i < numOfQ; i++)
@@ -228,11 +237,42 @@ namespace WumpusTest
                 }
             }
             render.askQuestion = false;
+            resetPop();
             if (correct > 0)
             {
-                return true;
+                render.correct = true;
+                switch (reason)
+                {
+                    case 1:
+                        player.updateInventory(1, 0);
+                        break;
+                    case 2:
+                        map.moveToInitial();
+                        updatePop(4);
+                        break;
+                    case 3:
+                        map.moveWumpusAway();
+                        updatePop(6);
+                        break;
+                }
+                reason = 0;
             }
-            return false;
+            else
+            {
+                switch (reason)
+                {
+                    case 2:
+                        updatePop(5);
+                        break;
+                    case 3:
+                        updatePop(7);
+                        break;
+                }
+                render.correct = false;
+            }
+            player.updateInventory(0, 0 - numOfQ);
+            updateRender();
+
         }
     }
 }
