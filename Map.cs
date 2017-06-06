@@ -18,7 +18,6 @@ namespace WumpusTest
         private int[,] arrayOfRooms;  //two-dimensional array of room connections
         private Wumpus wumpus;  //Wumpus object to keep track of objects
         private int initialPlayerLocation; //keeps track of starting location of the player
-        private bool[] beenInRoom; //Boolean array that tracks whether an user has visited a room before
         private Player player;
         private ArrayList num;
         public Map(int cavenum)
@@ -36,61 +35,38 @@ namespace WumpusTest
             batsLocations = new int[2];
             bottomlesspitLocations = new int[2];
             Random gen = new Random();
-            int index = (gen.Next(num.Count));
+            int index = gen.Next(0, num.Count);
             playerLocation = (int)num[index];
             initialPlayerLocation = playerLocation;
-            num.Remove(index);
-            index = (gen.Next(num.Count));
+            num.RemoveAt(index);
+            index = gen.Next(0, num.Count);
             wumpusLocation = (int)num[index];
-            num.Remove(index);
-            index = (gen.Next(num.Count));
+            num.RemoveAt(index);
+            index = gen.Next(0, num.Count);
             batsLocations[0] = (int)num[index];
-            num.Remove(index);
-            index = (gen.Next(num.Count));
+            num.RemoveAt(index);
+            index = gen.Next(0, num.Count);
             batsLocations[1] = (int)num[index];
-            num.Remove(index);
-            index = (gen.Next(num.Count));
+            num.RemoveAt(index);
+            index = gen.Next(0, num.Count);
             bottomlesspitLocations[0] = (int)num[index];
-            num.Remove(index);
-            index = (gen.Next(num.Count));
+            num.RemoveAt(index);
+            index = gen.Next(0, num.Count);
             bottomlesspitLocations[1] = (int)num[index];
-            num.Remove(index);
+            num.RemoveAt(index);
             cave = new Cave(cavenum);
             wumpus = new Wumpus();
             arrayOfRooms = cave.getRoomConnections();
             player = new Player();
         }
-        //public Map(int playerLocation, int wumpusLocation, int[] batsLocations, int[] bottomlesspitLocations, int cavenum)
-        //{
-        //    //Constructor that sets instance variables to parameters in constructor
-        //    this.playerLocation = playerLocation;
-        //    initialPlayerLocation = playerLocation;
-        //    this.wumpusLocation = wumpusLocation;
-        //    this.batsLocations = batsLocations;
-        //    this.bottomlesspitLocations = bottomlesspitLocations;
-        //    cave = new Cave(cavenum);
-        //    beenInRoom = new bool[30];
-        //    arrayOfRooms = cave.getRoomConnections();
-        //}
-        public ArrayList returnSecrets()
-        {
-            ArrayList secrets = new ArrayList();
-            secrets.Add("The wumpus is in room " + wumpusLocation);
-            secrets.Add("A bat is in room " + batsLocations[0]);
-            secrets.Add("A bat is in room " + batsLocations[1]);
-            secrets.Add("There's a pit in room " + bottomlesspitLocations[0]);
-            secrets.Add("There's a pit in room " + bottomlesspitLocations[1]);
-            secrets.Add("You're currently in room " + playerLocation);
-            secrets.Add("You have " + player.getNumOfArrows() + " arrows");
-            secrets.Add("You are on turn number " + player.getNumOfTurns());
-            secrets.Add("Your score is currently " + player.playerScore());
-            secrets.Add("You have " + player.getGold() + " gold coins");
-            return secrets;
-        }
         public void moveToInitial()
         {
             //moves player back to starting location of the player
             playerLocation = initialPlayerLocation;
+        }
+        public int getInitialLoc()
+        {
+            return initialPlayerLocation;
         }
         public int updatePlayerLocation(int user_input)
         {
@@ -145,11 +121,12 @@ namespace WumpusTest
             {
                 roomNumbers.Add(i);
             }
-            roomNumbers.Remove(bottomlesspitLocations[0] - 1);
-            roomNumbers.Remove(bottomlesspitLocations[1] - 1);
-            roomNumbers.Remove(batsLocations[0] - 1);
-            roomNumbers.Remove(batsLocations[1] - 1);
-            roomNumbers.Remove(playerLocation - 1);
+            roomNumbers.Remove(wumpusLocation );
+            roomNumbers.Remove(bottomlesspitLocations[0]);
+            roomNumbers.Remove(bottomlesspitLocations[1] );
+            roomNumbers.Remove(batsLocations[0] );
+            roomNumbers.Remove(batsLocations[1] );
+            roomNumbers.Remove(playerLocation);
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
@@ -162,11 +139,12 @@ namespace WumpusTest
             {
                 roomNumbers.Add(i);
             }
-            roomNumbers.Remove(bottomlesspitLocations[0] - 1);
-            roomNumbers.Remove(bottomlesspitLocations[1] - 1);
-            roomNumbers.Remove(batsLocations[0] - 1);
-            roomNumbers.Remove(batsLocations[1] - 1);
-            roomNumbers.Remove(playerLocation - 1);
+            roomNumbers.Remove(bottomlesspitLocations[0]);
+            roomNumbers.Remove(bottomlesspitLocations[1]);
+            roomNumbers.Remove(batsLocations[0]);
+            roomNumbers.Remove(batsLocations[1]);
+            roomNumbers.Remove(playerLocation);
+            roomNumbers.Remove(wumpusLocation);
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
@@ -184,14 +162,14 @@ namespace WumpusTest
             //returns 1 if bats
             //returns 2 if bottomless pit
             //return 3 if wumpus
-            if (playerLocation == wumpusLocation)
+            if (playerLocation == bottomlesspitLocations[0] || playerLocation == bottomlesspitLocations[1])
+            {
+                return 2;
+            }
+            else if (playerLocation == wumpusLocation)
             {
                 wumpus.setAsleep(false);
                 return 3;
-            }
-            else if (playerLocation == bottomlesspitLocations[0] || playerLocation == bottomlesspitLocations[1])
-            {
-                return 2;
             }
             else if (playerLocation == batsLocations[0] || playerLocation == batsLocations[1])
             {
@@ -203,36 +181,31 @@ namespace WumpusTest
             }
 
         }
-        public bool checkForWumpusNearby()
-        {
-            bool hazard = distanceBetweenRooms(playerLocation, wumpusLocation);
-            return hazard;
-        }
         public ArrayList checkForHazards()
         {
             //returns an arraylist of warnings 
             //depending on the hazards close by
             bool[] hazards = { false, false, false, false, false };
             ArrayList warnings = new ArrayList();
-            if (distanceBetweenRooms(playerLocation, wumpusLocation) == true)
+            if (distanceBetweenRooms(playerLocation, wumpusLocation) == 1)
             {
                 hazards[0] = true;
                 warnings.Add("I smell a Wumpus");
             }
-            if (distanceBetweenRooms(playerLocation, batsLocations[0]) == true)
+            if (distanceBetweenRooms(playerLocation, batsLocations[0]) == 1)
             {
                 hazards[1] = true;
             }
 
-            if (distanceBetweenRooms(playerLocation, batsLocations[1]) == true)
+            if (distanceBetweenRooms(playerLocation, batsLocations[1]) == 1)
             {
                 hazards[2] = true;
             }
-            if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[0]) == true)
+            if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[0]) == 1)
             {
                 hazards[3] = true;
             }
-            if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[1]) == true)
+            if (distanceBetweenRooms(playerLocation, bottomlesspitLocations[1]) == 1)
             {
                 hazards[4] = true;
             }
@@ -251,6 +224,10 @@ namespace WumpusTest
             else if (hazards[3] || hazards[4])
             {
                 warnings.Add("I feel a draft nearby");
+            }
+            else if (hazards[0] == false && hazards[1] == false && hazards[2] == false && hazards[3] == false && hazards[4] == false)
+            {
+                warnings.Add("No hazards nearby");
             }
             return warnings;
         }
@@ -305,14 +282,15 @@ namespace WumpusTest
             }
             return wumpus;
         }
-        public bool distanceBetweenRooms(int room1, int room2)
+        public int distanceBetweenRooms(int room1, int room2)
         {
-            //If distance between rooms is equal to 1, or 2 returns true
+            //If distance between rooms is 1, returns 1
+            //If distance between rooms is 2, returns 2
+            //If distance between rooms is greater, than 2 returns -1
 
             //Gets room connection array from cave
             int[] roomArray = new int[6];
             //Creates connection array for first room
-            bool hazard = false;
             //Sets return variable to false so if hazard is not two rooms away, method
             //will return false
             for (int i = 0; i < roomArray.Length; i++)
@@ -324,7 +302,7 @@ namespace WumpusTest
             {
                 if (room2 == roomArray[i])
                 {
-                    hazard = true;
+                    return 1;
                 }
             }
             //Above for loop checks      if room2 can be found in rooms that are one room away from room1
@@ -374,13 +352,11 @@ namespace WumpusTest
                 {
                     if (roomsTwoAway[i][j] == room2)
                     {
-                        hazard = true;
+                        return 2;
                     }
                 }
             }
-            //Checks to see if room2 is in any of the arrays.
-            //If so sets hazard to true
-            return hazard;
+            return -1;
         }
     }
 }
