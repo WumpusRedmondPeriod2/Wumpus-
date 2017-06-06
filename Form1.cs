@@ -12,10 +12,10 @@ namespace WumpusTest
         private int numOfQ;
         private int click = 0;
         private int cavenum;
-        public Form1(int cavenum)
+        public Form1(int cavenum, String playerName)
         {
             InitializeComponent();
-            game = new GameControl(cavenum);
+            game = new GameControl(cavenum, playerName);
             playerChoice = new String[game.render.numOfQuestions];
             this.cavenum = cavenum;
             button1.Visible = false;
@@ -183,6 +183,7 @@ namespace WumpusTest
             {
                 textDisplay.Text += "Last Secret Bought:\n"+game.render.secret;
             }
+            endGameScreen();
         }
         private void GoldCount_Click(object sender, EventArgs e)
         {
@@ -394,6 +395,7 @@ namespace WumpusTest
                     game.checkAnswer(playerChoice, numOfQ);
                     currentQ = 0;
                     enableButtons();
+                    game.moveCheck();
                     RenderScene(game.render);
                 }
                 else
@@ -554,6 +556,7 @@ namespace WumpusTest
             enableButtons();
             shootArrowPanel.Enabled = false;
             shootArrowPanel.Visible = false;
+            game.moveCheck();
             RenderScene(game.render);
         }
 
@@ -592,15 +595,24 @@ namespace WumpusTest
             {
                 this.Hide();
                 game.updatePop(8);
-                var form1 = new EndGame(game.render.score);
-                form1.Closed += (s, args) => this.Close();
-                form1.Show();
+                game.endGame(0);
+                endGameScreen();
             }
             else
             {
                 game.updatePop(9);
             }
             RenderScene(game.render);
+        }
+
+        private void endGameScreen()
+        {
+            if (game.render.IsGameOver)
+            {
+                var form1 = new EndGame(game.render.cause, game.render.score);
+                form1.Closed += (s, args) => this.Close();
+                form1.Show();
+            }
         }
 
         private void button7_Click_1(object sender, EventArgs e)

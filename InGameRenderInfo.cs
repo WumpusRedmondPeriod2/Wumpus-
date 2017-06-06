@@ -11,6 +11,9 @@ namespace WumpusTest
     {
         //is game over
         public bool IsGameOver;
+        //cause of game end
+        public int cause;
+
         //0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
         public int isHazard;
         //indices: 0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
@@ -51,7 +54,9 @@ namespace WumpusTest
 
         public InGameRenderInfo()
         {
-            IsGameOver = true;
+            IsGameOver = false;
+            cause = -1;
+            score = 0;
             isHazard = 0;
             wumpusLocation = 0;
             warnings = new ArrayList(0);

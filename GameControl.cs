@@ -14,16 +14,17 @@ namespace WumpusTest
         
         public InGameRenderInfo render;
         private Trivia trivia;
-      //  private HighScore scores;
+        private HighScore scores;
         private Map map;
         private Player player;
         private int cavenum;
         int reason = 0;
         //constructor - initializes all objects
-        public GameControl(int cavenum)
+        public GameControl(int cavenum, String playerName)
         {
             this.cavenum = cavenum;
             startGame();
+            player.setPlayerName(playerName);
         }
         
         public void startGame()
@@ -31,10 +32,10 @@ namespace WumpusTest
             map = new Map(cavenum);
             //initialization
             render = new InGameRenderInfo();
-            render.IsGameOver = true;
+            render.IsGameOver = false;
             render.CaveConnections = map.getConnections();
-              trivia = new Trivia();
-            //   scores = new HighScore();
+            trivia = new Trivia();
+            scores = new HighScore();
             player = new Player();
             render.currentPaths = map.getCurrentConnections(map.getPlayerLocation());
             reason = 0;
@@ -57,18 +58,14 @@ namespace WumpusTest
             return map.getPlayerLocation();
         }
         //logs the high score if it is one, then ends game
-        private void endGame(int cause)
-        { 
-            //0 - no more coins, 1 - pit, 2 - wumpus
-            //TODO create a calculate score function here
-            //TODO high score method should write a score if it is a high score
+        //0 - player win, 1 - no gold, 2 - no arrow, 3- pit, 4 - wumpus
+        public void endGame(int cause)
+        {
+            render.IsGameOver = true;
+            render.cause = cause;
+            render.score = returnScore();
 
-            /*
-            if (scores.checkHighScore(score)
-            {   
-                scores.newHighScore(player.getScore());
-            }
-             */
+            scores.addNewHighScore(player.getPlayerName(), render.score);
         }
         
         public void updatePop(int message)
@@ -133,7 +130,11 @@ namespace WumpusTest
         {
             if (player.getGold() < 0)
             {
-                endGame(0);
+                endGame(1);
+            }
+            if (player.getNumOfArrows() == 0)
+            {
+                endGame(2);
             }
             encounterHazard(map.encounterHazard());
             updateRender();
@@ -309,9 +310,11 @@ namespace WumpusTest
                 {
                     case 2:
                         updatePop(5);
+                        endGame(3);
                         break;
                     case 3:
                         updatePop(7);
+                        endGame(4);
                         break;
                 }
                 render.correct = false;

@@ -173,6 +173,7 @@
             this.MaximizeBox = false;
             this.Name = "CaveChoice";
             this.Text = "CaveChoice";
+            this.Load += new System.EventHandler(this.CaveChoice_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

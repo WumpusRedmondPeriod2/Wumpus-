@@ -10,6 +10,7 @@ namespace WumpusTest
     //Calculate number of turns 
     class Player
     {
+        private String playerName;
         private int numOfTurns;
         private int gold;
         private int arrows;
@@ -20,7 +21,15 @@ namespace WumpusTest
             arrows = 3;
             maxGold = 100;
             numOfTurns = 0;
-            gold = 0;
+            gold = 5;
+        }
+        public void setPlayerName(String name)
+        {
+            playerName = name;
+        }
+        public String getPlayerName()
+        {
+            return playerName;
         }
         public void addturn()
         {

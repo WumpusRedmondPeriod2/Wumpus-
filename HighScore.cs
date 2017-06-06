@@ -20,6 +20,17 @@ namespace WumpusTest
             names = new string[5];
         }
 
+        public string[] getNames()
+        {
+            return names;
+        }
+
+
+        public int[] getScores()
+        {
+            return scores;
+        }
+
 
         public void addNewHighScore(string name, int score)
         {
@@ -67,10 +78,6 @@ namespace WumpusTest
                 System.IO.StreamWriter write = new System.IO.StreamWriter(@"HighScoreDoc.txt");
                 write.Write(names[i] + " " + scores[i] + "\n");
             }
-        }
-        public void showHighScores()
-        {
-            System.Diagnostics.Process.Start("HighScoreDoc.txt");
         }
 
     }

@@ -50,7 +50,7 @@ namespace WumpusTest
                 caveChosen = 5;
             }
             this.Hide();
-            var form1 = new Form1(caveChosen);
+            var form1 = new Form1(caveChosen,playerName.Text);
             form1.Closed += (s, args) => this.Close();
             form1.Show();
         }
@@ -90,6 +90,11 @@ namespace WumpusTest
         {
             enableEnterButton();
             userName = playerName.Text;
+        }
+
+        private void CaveChoice_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
