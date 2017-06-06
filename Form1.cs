@@ -101,7 +101,7 @@ namespace WumpusTest
             label7.Text = info.pitlocation2.ToString();
             label8.Text = info.batlocation1.ToString();
             label9.Text = info.batlocation2.ToString();
-            renderPop(info);
+            implementHazardPics(game.render);
             if (info.currentPaths[0] > 0)
             {
                 button1.Visible = true;
@@ -173,19 +173,21 @@ namespace WumpusTest
             {
                 panel1.Visible = false;
             }
-            textDisplay.Text += renderPop(info) + "\n";
-            textDisplay.Text = "Warnings: \n";
+            textDisplay.Text = renderPop(info) + "\n";
+            textDisplay.Text += "Warnings: \n";
             for (int i = 0; i < info.warnings.Count; i++)
             {
-                textDisplay.Text += info.warnings[i] + "\n";
+                textDisplay.Text += info.warnings[i] + "\n\n";
+            }
+            if (!game.render.secret.Equals(""))
+            {
+                textDisplay.Text += "Last Secret Bought:\n"+game.render.secret;
             }
         }
-
         private void GoldCount_Click(object sender, EventArgs e)
         {
             label1.Text = "Gold Count: " + game.render.GoldCount;
         }
-
         private void ArrowCount_Click(object sender, EventArgs e)
         {
             label2.Text = "Arrow Count: " + game.render.ArrowCount;
@@ -196,39 +198,32 @@ namespace WumpusTest
             game.movePlayer(room);
             game.moveCheck();
             RenderScene(game.render);
+            //renderQuestion needs to be last in method - doesn't disable buttons otherwise
             renderQuestion(game.render);
         }
         private void Room1_Click(object sender, EventArgs e)
         {
             move(1);
-            implementHazardPics(game.render);
         }
         private void Room2_Click(object sender, EventArgs e)
         {
             move(5);
-            implementHazardPics(game.render);
-
         }
         private void Room3_Click(object sender, EventArgs e)
         {
             move(3);
-            implementHazardPics(game.render);
-
         }
         private void Room4_Click(object sender, EventArgs e)
         {
             move(2);
-            implementHazardPics(game.render);
         }
         private void Room5_Click(object sender, EventArgs e)
         {
-            move(4);
-            implementHazardPics(game.render);
+            move(4); 
         }
         private void Room6_Click(object sender, EventArgs e)
         {
             move(6);
-            implementHazardPics(game.render);
         }
         public void renderQuestion(InGameRenderInfo info)
         {
@@ -286,6 +281,7 @@ namespace WumpusTest
             }
             return message;
         }
+
         public void question(String q)
         {
             label3.Text = q;
@@ -296,7 +292,6 @@ namespace WumpusTest
             radioButton2.Text = a[1];
             radioButton3.Text = a[2];
             radioButton4.Text = a[3];
-
         }
         private void disableButtons()
         {
@@ -331,7 +326,7 @@ namespace WumpusTest
             if (!File.Exists(fileMovement))
             {
                 disableButtons();
-                tutorialButton.Text = "Click on the sides of the hexagon \nto move between rooms. \nIf there is a hazard nearby you will get a \nwarning at the top of the screen. \nYou can purchase arrows and secrets and \nshoot arrows using the buttons on the right \nClick on the text to continue";
+                tutorialButton.Text = "Click on the sides of the hexagon \nto move between rooms. \nIf there is a hazard nearby you will get a \nwarning to the left of the room. \nYou can purchase arrows and secrets and \nshoot arrows using the buttons on the right \nClick on the text to continue";
             }
         }
         private void Form1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -384,6 +379,10 @@ namespace WumpusTest
                 radioButton3.Checked = false;
                 radioButton4.Checked = false;
                 EnterButton.Text = "Next";
+                radioButton1.Visible = false;
+                radioButton2.Visible = false;
+                radioButton3.Visible = false;
+                radioButton4.Visible = false;
             }
             else
             {
@@ -403,6 +402,10 @@ namespace WumpusTest
                     currentQ++;
                     renderQuestion(game.render);
                 }
+                radioButton1.Visible = true;
+                radioButton2.Visible = true;
+                radioButton3.Visible = true;
+                radioButton4.Visible = true;
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 radioButton3.Checked = false;
@@ -442,8 +445,9 @@ namespace WumpusTest
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //purchaseSecrets Method
-            //Asks three trivia questions, if user gets two or more right gives random secret
+            game.buySecret();
+            game.updateTurns();
+            renderQuestion(game.render);
         }
 
         private void playerScore_Click(object sender, EventArgs e)
@@ -543,62 +547,48 @@ namespace WumpusTest
 
         }
 
-        private void room2_Click_1(object sender, EventArgs e)
+        private void shootClick(int room)
         {
-            bool shot = game.shoot(game.render.currentPaths[1]);
+            bool shot = game.shoot(game.render.currentPaths[room]);
             resolveConflictWithWumpus(shot);
             enableButtons();
             shootArrowPanel.Enabled = false;
             shootArrowPanel.Visible = false;
+            RenderScene(game.render);
+        }
+
+        private void room2_Click_1(object sender, EventArgs e)
+        {
+            shootClick(1);
         }
 
         private void room1_Click_1(object sender, EventArgs e)
         {
-            bool shot = game.shoot(game.render.currentPaths[0]);
-            resolveConflictWithWumpus(shot);
-            enableButtons();
-            shootArrowPanel.Enabled = false;
-            shootArrowPanel.Visible = false;
+            shootClick(0);
         }
 
         private void room3_Click_1(object sender, EventArgs e)
         {
-            bool shot = game.shoot(game.render.currentPaths[2]);
-            resolveConflictWithWumpus(shot);
-            enableButtons();
-            shootArrowPanel.Enabled = false;
-            shootArrowPanel.Visible = false;
+            shootClick(3);
         }
 
         private void room5_Click_1(object sender, EventArgs e)
         {
-            bool shot = game.shoot(game.render.currentPaths[4]);
-            resolveConflictWithWumpus(shot);
-            enableButtons();
-            shootArrowPanel.Enabled = false;
-            shootArrowPanel.Visible = false;
+            shootClick(4);
         }
 
         private void room4_Click_1(object sender, EventArgs e)
         {
-            bool shot = game.shoot(game.render.currentPaths[3]);
-            resolveConflictWithWumpus(shot);
-            enableButtons();
-            shootArrowPanel.Enabled = false;
-            shootArrowPanel.Visible = false;
+            shootClick(3);
         }
 
         private void room6_Click_1(object sender, EventArgs e)
         {
-            bool shot = game.shoot(game.render.currentPaths[5]);
-            resolveConflictWithWumpus(shot);
-            enableButtons();
-            shootArrowPanel.Enabled = false;
-            shootArrowPanel.Visible = false;
+            shootClick(5);
         }
         private void resolveConflictWithWumpus(bool shot)
         {
-            if (shot == true)
+            if (shot)
             {
                 this.Hide();
                 game.updatePop(8);
@@ -610,11 +600,19 @@ namespace WumpusTest
             {
                 game.updatePop(9);
             }
+            RenderScene(game.render);
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            shootArrowPanel.Visible = false;
+            shootArrowPanel.Enabled = false;
+            enableButtons();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
-
-
-
-
-

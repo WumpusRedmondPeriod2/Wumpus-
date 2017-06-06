@@ -79,12 +79,6 @@ namespace WumpusTest
         {
             render.popUp = new ArrayList();
         }
-        public ArrayList returnSecrets()
-        {
-           ArrayList secrets = map.returnSecrets();
-           
-           return secrets;
-        }
 
         public void encounterBats()
         {
@@ -111,6 +105,7 @@ namespace WumpusTest
             switch (hazard)
             {
                 case 1:
+                    encounterBats();
                     break;
                 case 2:
                     encounterPit();
@@ -192,6 +187,54 @@ namespace WumpusTest
             updateRender();
             return render;
         }
+        public InGameRenderInfo buySecret()
+        {
+            updateQuestion(3);
+            reason = 4;
+            updateRender();
+            return render;
+        }
+        public InGameRenderInfo updateSecret()
+        {
+            Random rnd = new Random();
+            String sec = "";
+            switch (rnd.Next(10))
+            {
+                case 0:
+                    sec = "Not all secrets are useful. Some secrets are the same!";
+                    break;
+                case 1:
+                    sec = "The UK Royal coat of arms has a unicorn and an English lion.";
+                    break;
+                case 2:
+                    sec = "Try drawing the pathways on a piece of paper. For a challenge, map the cave!";
+                    break;
+                case 3:
+                    sec = "Doom was released the same year the EU was formally established.";
+                    break;
+                case 4:
+                    sec = "Beware! There is a pit in room " + map.getBottomLessPitLocations()[0];
+                    break;
+                case 5:
+                    sec = "The original Hunt the Wumpus was written in BASIC!";
+                    break;
+                case 6:
+                    sec = "It costs three gold coins to buy a secret. Was it worth it?";
+                    break;
+                case 7:
+                    sec = "Nirvana's first album isn't actually used to remove stains.";
+                    break;
+                case 8:
+                    sec = "During World War II, the filling of Twinkies was replaced with vanilla cream.";
+                    break;
+                case 9:
+                    sec = "Be careful! Falling into a pit may return you to your starting room, room " + map.getInitialLoc();
+                    break;
+                    
+            }
+            render.secret = sec;
+            return render;
+        }
 
         //shoots an arrow at specified room
         public bool shoot(int room)
@@ -253,6 +296,9 @@ namespace WumpusTest
                     case 3:
                         map.moveWumpusAway();
                         updatePop(6);
+                        break;
+                    case 4:
+                        updateSecret();
                         break;
                 }
                 reason = 0;

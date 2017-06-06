@@ -47,6 +47,7 @@ namespace WumpusTest
         public String[] question;
         public String[][] answers;
         public Boolean  correct;
+        public String secret;
 
         public InGameRenderInfo()
         {
@@ -64,6 +65,7 @@ namespace WumpusTest
             question = new String[0];
             answers = new String[0][];
             popUp = new ArrayList(0);
+            secret = "";
         }
     }
 }
