@@ -27,7 +27,7 @@ namespace WumpusTest
         //tells checkAnswer what method called it, what should happen
         //0 - nothing, 1 - player bought arrows, 2 - player fell into pit
         //3 - player found wumpus, 4 - player bought secrets
-        int reason = 0;
+        private int reason = 0;
 
         //constructor
         public GameControl(int cavenum, String playerName)
@@ -72,7 +72,7 @@ namespace WumpusTest
             return player.playerScore();
         }
         //controls Wumpus behavior, moves the Wumpus randomly
-        public void moveWumpus()
+        private void moveWumpus()
         {
             map.moveWumpusAtRandom();
         }
@@ -100,7 +100,7 @@ namespace WumpusTest
             render.popUp.Add(message);
         }
         //removes all messages from the display
-        public void resetPop()
+        private void resetPop()
         {
             render.popUp = new ArrayList();
         }
@@ -127,7 +127,7 @@ namespace WumpusTest
             //returns the render info to UI
             return render;
         }
-        public void encounterBats()
+        private void encounterBats()
         {
             //randomly moves the bat
             map.moveBatRandom();
@@ -140,14 +140,14 @@ namespace WumpusTest
             //update the render for UI
             updateRender();
         }
-        public void encounterPit()
+        private void encounterPit()
         {
             //asks three questions
             updateQuestion(3);
             //tells checkAnswer that questions are for the pit
             reason = 2;
         }
-        public void encounterWumpus()
+        private void encounterWumpus()
         {
             //asks five questions
             updateQuestion(5);
@@ -259,7 +259,7 @@ namespace WumpusTest
             return render;
         }
         //updates the secret that is displayed to the one last purchased
-        public InGameRenderInfo updateSecret()
+        private InGameRenderInfo updateSecret()
         {
             String sec = "";
             //generates a random secret - you can get the same one twice!
@@ -322,7 +322,7 @@ namespace WumpusTest
             return false;
         }
         //moves the Wumpus away if you miss your shot
-        public void moveWumpusIfArrowMissed()
+        private void moveWumpusIfArrowMissed()
         {
             map.moveWumpusAway();
             //updates render info
