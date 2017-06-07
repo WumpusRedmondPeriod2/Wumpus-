@@ -11,18 +11,23 @@ namespace WumpusTest
     {
         //is game over
         public bool IsGameOver;
+        //cause for game end
         public int cause;
+
         //0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
         public int isHazard;
+        //arraylist of nearby hazards
         //indices: 0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
-        //false - no hazard, true - one of hazard, null - two of
+        //false - no hazard, true - one of hazard, null - two of the hazard
         public ArrayList warnings;
 
+        //the messages that should be displayed
         //0 - none, 1 - bats, 2 - pit, 3 - wumpus
         //resolution: 4- pit true, 5 - pit false, 6 - wumpus true, 7 - wumpus false
         // 8- hit arrow, 9 - missed arrow
         public ArrayList popUp;
 
+        //locations of the hazards
         public int wumpusLocation;
         public int batlocation1;
         public int batlocation2;
@@ -38,18 +43,24 @@ namespace WumpusTest
         //displayed score
         public int score;
 
+        //all the possible cave pathways
         public int[,] CaveConnections;
+        //the current possible pathways
         public int[] currentPaths;
-        
+
         //whether or not a question should be asked
         public bool askQuestion;
-        //question and answers - input goes to control
+        //question and answers
         public int numOfQuestions;
         public String[] question;
         public String[][] answers;
-        public Boolean  correct;
+
+        //the current displayed secret
         public String secret;
+        //the current displayed fact
         public String fact;
+
+        //constructor
         public InGameRenderInfo()
         {
             IsGameOver = false;
@@ -62,7 +73,7 @@ namespace WumpusTest
             ArrowCount = 0;
             GoldCount = 0;
             askQuestion = false;
-            CaveConnections = new int[0,0];
+            CaveConnections = new int[0, 0];
             numOfQuestions = 0;
             question = new String[0];
             answers = new String[0][];
