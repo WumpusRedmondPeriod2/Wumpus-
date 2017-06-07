@@ -59,7 +59,7 @@ namespace WumpusTest
         //increments turn count
         public void updateTurns()
         {
-            player.addturn();
+            player.addTurn();
         }
         //returns the number of turns taken
         public int returnTurns()
