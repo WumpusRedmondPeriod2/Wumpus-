@@ -25,6 +25,7 @@ namespace WumpusTest
             {
                 elimQuestions[i] = false;
             }
+            elimQuestions[0] = true;
         }
         public string getQuestion()
         {

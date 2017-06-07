@@ -71,9 +71,9 @@ namespace WumpusTest
             this.room3 = new System.Windows.Forms.Button();
             this.room4 = new System.Windows.Forms.Button();
             this.room5 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.room1 = new System.Windows.Forms.Button();
             this.room2 = new System.Windows.Forms.Button();
+            this.room1 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wumpusPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pitPicture)).BeginInit();
@@ -504,9 +504,9 @@ namespace WumpusTest
             this.tutorialButton.BackColor = System.Drawing.Color.SandyBrown;
             this.tutorialButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tutorialButton.ForeColor = System.Drawing.Color.White;
-            this.tutorialButton.Location = new System.Drawing.Point(1241, 621);
+            this.tutorialButton.Location = new System.Drawing.Point(1015, 542);
             this.tutorialButton.Name = "tutorialButton";
-            this.tutorialButton.Size = new System.Drawing.Size(121, 78);
+            this.tutorialButton.Size = new System.Drawing.Size(173, 117);
             this.tutorialButton.TabIndex = 26;
             this.tutorialButton.Text = "button7";
             this.tutorialButton.UseVisualStyleBackColor = false;
@@ -571,9 +571,9 @@ namespace WumpusTest
             this.shootArrowPanel.Controls.Add(this.room2);
             this.shootArrowPanel.Controls.Add(this.room1);
             this.shootArrowPanel.Controls.Add(this.label10);
-            this.shootArrowPanel.Location = new System.Drawing.Point(812, 379);
+            this.shootArrowPanel.Location = new System.Drawing.Point(843, 349);
             this.shootArrowPanel.Name = "shootArrowPanel";
-            this.shootArrowPanel.Size = new System.Drawing.Size(558, 341);
+            this.shootArrowPanel.Size = new System.Drawing.Size(501, 382);
             this.shootArrowPanel.TabIndex = 32;
             this.shootArrowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.shootArrowPanel_Paint);
             // 
@@ -583,7 +583,7 @@ namespace WumpusTest
             this.cancelButton.BackColor = System.Drawing.Color.SandyBrown;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(203, 283);
+            this.cancelButton.Location = new System.Drawing.Point(364, 305);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(126, 54);
             this.cancelButton.TabIndex = 7;
@@ -597,7 +597,7 @@ namespace WumpusTest
             this.room6.BackColor = System.Drawing.Color.SandyBrown;
             this.room6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.room6.ForeColor = System.Drawing.Color.White;
-            this.room6.Location = new System.Drawing.Point(355, 217);
+            this.room6.Location = new System.Drawing.Point(77, 217);
             this.room6.Name = "room6";
             this.room6.Size = new System.Drawing.Size(120, 46);
             this.room6.TabIndex = 6;
@@ -611,7 +611,7 @@ namespace WumpusTest
             this.room3.BackColor = System.Drawing.Color.SandyBrown;
             this.room3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.room3.ForeColor = System.Drawing.Color.White;
-            this.room3.Location = new System.Drawing.Point(73, 170);
+            this.room3.Location = new System.Drawing.Point(276, 155);
             this.room3.Name = "room3";
             this.room3.Size = new System.Drawing.Size(120, 46);
             this.room3.TabIndex = 5;
@@ -625,7 +625,7 @@ namespace WumpusTest
             this.room4.BackColor = System.Drawing.Color.SandyBrown;
             this.room4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.room4.ForeColor = System.Drawing.Color.White;
-            this.room4.Location = new System.Drawing.Point(73, 217);
+            this.room4.Location = new System.Drawing.Point(276, 217);
             this.room4.Name = "room4";
             this.room4.Size = new System.Drawing.Size(120, 46);
             this.room4.TabIndex = 4;
@@ -639,7 +639,7 @@ namespace WumpusTest
             this.room5.BackColor = System.Drawing.Color.SandyBrown;
             this.room5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.room5.ForeColor = System.Drawing.Color.White;
-            this.room5.Location = new System.Drawing.Point(355, 170);
+            this.room5.Location = new System.Drawing.Point(181, 274);
             this.room5.Name = "room5";
             this.room5.Size = new System.Drawing.Size(120, 46);
             this.room5.TabIndex = 3;
@@ -647,16 +647,19 @@ namespace WumpusTest
             this.room5.UseVisualStyleBackColor = false;
             this.room5.Click += new System.EventHandler(this.room5_Click_1);
             // 
-            // label10
+            // room2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(117, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(343, 36);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Shoot Arrow Into Room: ";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
+            this.room2.AutoSize = true;
+            this.room2.BackColor = System.Drawing.Color.SandyBrown;
+            this.room2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.room2.ForeColor = System.Drawing.Color.White;
+            this.room2.Location = new System.Drawing.Point(181, 103);
+            this.room2.Name = "room2";
+            this.room2.Size = new System.Drawing.Size(120, 46);
+            this.room2.TabIndex = 2;
+            this.room2.Text = "2";
+            this.room2.UseVisualStyleBackColor = false;
+            this.room2.Click += new System.EventHandler(this.room2_Click_1);
             // 
             // room1
             // 
@@ -664,7 +667,7 @@ namespace WumpusTest
             this.room1.BackColor = System.Drawing.Color.SandyBrown;
             this.room1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.room1.ForeColor = System.Drawing.Color.White;
-            this.room1.Location = new System.Drawing.Point(73, 124);
+            this.room1.Location = new System.Drawing.Point(77, 155);
             this.room1.Name = "room1";
             this.room1.Size = new System.Drawing.Size(120, 46);
             this.room1.TabIndex = 1;
@@ -672,19 +675,17 @@ namespace WumpusTest
             this.room1.UseVisualStyleBackColor = false;
             this.room1.Click += new System.EventHandler(this.room1_Click_1);
             // 
-            // room2
+            // label10
             // 
-            this.room2.AutoSize = true;
-            this.room2.BackColor = System.Drawing.Color.SandyBrown;
-            this.room2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.room2.ForeColor = System.Drawing.Color.White;
-            this.room2.Location = new System.Drawing.Point(355, 124);
-            this.room2.Name = "room2";
-            this.room2.Size = new System.Drawing.Size(120, 46);
-            this.room2.TabIndex = 2;
-            this.room2.Text = "2";
-            this.room2.UseVisualStyleBackColor = false;
-            this.room2.Click += new System.EventHandler(this.room2_Click_1);
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(99, 26);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(343, 36);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Shoot Arrow Into Room: ";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // Form1
             // 

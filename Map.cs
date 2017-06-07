@@ -85,6 +85,15 @@ namespace WumpusTest
 
             return playerLocation;
         }
+        public void moveWumpusAtRandom()
+        {
+            Random gen = new Random();
+            int move = gen.Next(10) + 1;
+            if(move == 1)
+            {
+                moveWumpus();
+            }
+        }
         public void moveWumpusAway()
         {
             //moves the wumpus if arrow shot by user misses the wumpus
@@ -112,7 +121,11 @@ namespace WumpusTest
                     countOfPositives++;
                 }
             }
-            wumpusLocation = surroundingRooms[gen.Next(countOfPositives)];
+            do
+            {
+                wumpusLocation = surroundingRooms[gen.Next(countOfPositives)];
+            } while (wumpusLocation == playerLocation);
+           
         }
         public void movePlayerRandom()
         {
@@ -121,15 +134,16 @@ namespace WumpusTest
             {
                 roomNumbers.Add(i);
             }
-            roomNumbers.Remove(wumpusLocation );
+            roomNumbers.Remove(wumpusLocation);
             roomNumbers.Remove(bottomlesspitLocations[0]);
-            roomNumbers.Remove(bottomlesspitLocations[1] );
-            roomNumbers.Remove(batsLocations[0] );
-            roomNumbers.Remove(batsLocations[1] );
+            roomNumbers.Remove(bottomlesspitLocations[1]);
+            roomNumbers.Remove(batsLocations[0]);
+            roomNumbers.Remove(batsLocations[1]);
             roomNumbers.Remove(playerLocation);
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
+            Debug.WriteLine("New player location: " +index);
             playerLocation = newLocation;
         }
         public void moveBatRandom()
@@ -144,10 +158,10 @@ namespace WumpusTest
             roomNumbers.Remove(batsLocations[0]);
             roomNumbers.Remove(batsLocations[1]);
             roomNumbers.Remove(playerLocation);
-            roomNumbers.Remove(wumpusLocation);
             Random gen = new Random();
             int index = gen.Next(roomNumbers.Count);
             int newLocation = (int)roomNumbers[index];
+            Debug.WriteLine("New bat index: " +index);
             if (batsLocations[0] == playerLocation)
             {
                 batsLocations[0] = newLocation;

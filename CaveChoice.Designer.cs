@@ -136,6 +136,7 @@
             // 
             this.playerName.AutoSize = true;
             this.playerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerName.ForeColor = System.Drawing.Color.DarkRed;
             this.playerName.Location = new System.Drawing.Point(326, 260);
             this.playerName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.playerName.Name = "playerName";
@@ -173,7 +174,6 @@
             this.MaximizeBox = false;
             this.Name = "CaveChoice";
             this.Text = "CaveChoice";
-            this.Load += new System.EventHandler(this.CaveChoice_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

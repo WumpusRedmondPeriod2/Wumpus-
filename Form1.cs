@@ -16,19 +16,20 @@ namespace WumpusTest
         {
             InitializeComponent();
             game = new GameControl(cavenum, playerName);
+            
             playerChoice = new String[game.render.numOfQuestions];
             this.cavenum = cavenum;
-            button1.Visible = false;
+            button1.Visible = true;
             button1.Enabled = false;
-            button2.Visible = false;
+            button2.Visible = true;
             button2.Enabled = false;
-            button3.Visible = false;
+            button3.Visible = true;
             button3.Enabled = false;
-            button4.Visible = false;
+            button4.Visible = true;
             button4.Enabled = false;
-            button5.Visible = false;
+            button5.Visible = true;
             button5.Enabled = false;
-            button6.Visible = false;
+            button6.Visible = true;
             button6.Enabled = false;
             wumpusPicture.Visible = false;
             batPicture.Visible = false;
@@ -91,6 +92,7 @@ namespace WumpusTest
         }
         private void RenderScene(InGameRenderInfo info)
         {
+            //game.updateFact();
             label1.Text = "Gold Count: " + info.GoldCount.ToString();
             label2.Text = "Arrow Count: " + info.ArrowCount.ToString();
             turnLabel.Text = "Number of Turns: " + info.numberOfTurns.ToString();
@@ -101,68 +103,68 @@ namespace WumpusTest
             label7.Text = info.pitlocation2.ToString();
             label8.Text = info.batlocation1.ToString();
             label9.Text = info.batlocation2.ToString();
+            button1.Text = Math.Abs(info.currentPaths[0]).ToString();
+            button2.Text = Math.Abs(info.currentPaths[1]).ToString();
+            button3.Text = Math.Abs(info.currentPaths[2]).ToString();
+            button4.Text = Math.Abs(info.currentPaths[3]).ToString();
+            button5.Text = Math.Abs(info.currentPaths[4]).ToString();
+            button6.Text = Math.Abs(info.currentPaths[5]).ToString();
             implementHazardPics(game.render);
             if (info.currentPaths[0] > 0)
             {
                 button1.Visible = true;
-                button1.Text = info.currentPaths[0].ToString();
                 button1.Enabled = true;
             }
             else
             {
-                button1.Visible = false;
+                button1.Enabled = false;
             }
 
             if (info.currentPaths[1] > 0)
             {
                 button2.Visible = true;
-                button2.Text = info.currentPaths[1].ToString();
                 button2.Enabled = true;
             }
             else
             {
-                button2.Visible = false;
+                button2.Enabled = false;
             }
 
             if (info.currentPaths[2] > 0)
             {
                 button3.Visible = true;
-                button3.Text = info.currentPaths[2].ToString();
                 button3.Enabled = true;
             }
             else
             {
-                button3.Visible = false;
+                button3.Enabled = false;
             }
             if (info.currentPaths[3] > 0)
             {
                 button4.Visible = true;
-                button4.Text = info.currentPaths[3].ToString();
                 button4.Enabled = true;
             }
             else
             {
-                button4.Visible = false;
+                button4.Enabled = false;
             }
             if (info.currentPaths[4] > 0)
             {
                 button5.Visible = true;
-                button5.Text = info.currentPaths[4].ToString();
                 button5.Enabled = true;
             }
             else
             {
-                button5.Visible = false;
+                button5.Enabled = false;
             }
             if (info.currentPaths[5] > 0)
             {
                 button6.Visible = true;
-                button6.Text = info.currentPaths[5].ToString();
                 button6.Enabled = true;
             }
             else
             {
-                button6.Visible = false;
+                button6.Enabled = false;
             }
 
             if (info.askQuestion)
@@ -177,12 +179,14 @@ namespace WumpusTest
             textDisplay.Text += "Warnings: \n";
             for (int i = 0; i < info.warnings.Count; i++)
             {
-                textDisplay.Text += info.warnings[i] + "\n\n";
+                textDisplay.Text += info.warnings[i] + "\n";
             }
             if (!game.render.secret.Equals(""))
             {
-                textDisplay.Text += "Last Secret Bought:\n"+game.render.secret;
+                textDisplay.Text += "Last Secret Bought:\n" + game.render.secret;
             }
+           
+            textDisplay.Text += "Trivia: " + game.render.fact;
             endGameScreen();
         }
         private void GoldCount_Click(object sender, EventArgs e)
@@ -192,6 +196,15 @@ namespace WumpusTest
         private void ArrowCount_Click(object sender, EventArgs e)
         {
             label2.Text = "Arrow Count: " + game.render.ArrowCount;
+        }
+        private void endGameScreen()
+        {
+            if (game.render.IsGameOver)
+            {
+                this.Hide();
+                var form1 = new EndGame(game.render.cause, game.render.score);
+                form1.Closed += (s, args) => this.Close();
+            }
         }
         private void move(int room)
         {
@@ -249,7 +262,7 @@ namespace WumpusTest
                 switch ((int)info.popUp[i])
                 {
                     case 0:
-                        message = "";
+                        message += "";
                         break;
                     case 1:
                         message = "You have been moved to a random room by bats.";
@@ -282,7 +295,6 @@ namespace WumpusTest
             }
             return message;
         }
-
         public void question(String q)
         {
             label3.Text = q;
@@ -332,10 +344,7 @@ namespace WumpusTest
         }
         private void Form1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-
-            int mouseX = e.X;
-            int mouseY = e.Y;
-
+           
         }
         private void EnterButton_Click(object sender, EventArgs e)
         {
@@ -447,6 +456,8 @@ namespace WumpusTest
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //purchaseSecrets Method
+            //Asks three trivia questions, if user gets two or more right gives random secret
             game.buySecret();
             game.updateTurns();
             renderQuestion(game.render);
@@ -472,6 +483,7 @@ namespace WumpusTest
             enableButtons();
             tutorialButton.Enabled = false;
             tutorialButton.Visible = false;
+            RenderScene(game.render);
         }
 
         private void shootArrow_Click(object sender, EventArgs e)
@@ -479,69 +491,13 @@ namespace WumpusTest
             disableButtons();
             shootArrowPanel.Visible = true;
             shootArrowPanel.Enabled = true;
-            if (game.render.currentPaths[0] > 0)
-            {
-                room1.Visible = true;
-                room1.Text = game.render.currentPaths[0].ToString();
-                room1.Enabled = true;
-            }
-            else
-            {
-                room1.Visible = false;
-            }
-
-            if (game.render.currentPaths[1] > 0)
-            {
-                room2.Visible = true;
-                room2.Text = game.render.currentPaths[1].ToString();
-                room2.Enabled = true;
-            }
-            else
-            {
-                room2.Visible = false;
-            }
-
-            if (game.render.currentPaths[2] > 0)
-            {
-                room3.Visible = true;
-                room3.Text = game.render.currentPaths[2].ToString();
-                room3.Enabled = true;
-            }
-            else
-            {
-                room3.Visible = false;
-            }
-            if (game.render.currentPaths[3] > 0)
-            {
-                room4.Visible = true;
-                room4.Text = game.render.currentPaths[3].ToString();
-                room4.Enabled = true;
-            }
-            else
-            {
-                room4.Visible = false;
-            }
-            if (game.render.currentPaths[4] > 0)
-            {
-                room5.Visible = true;
-                room5.Text = game.render.currentPaths[4].ToString();
-                room5.Enabled = true;
-            }
-            else
-            {
-                room5.Visible = false;
-            }
-            if (game.render.currentPaths[5] > 0)
-            {
-                room6.Visible = true;
-                room6.Text = game.render.currentPaths[5].ToString();
-                room6.Enabled = true;
-            }
-            else
-            {
-                room6.Visible = false;
-            }
-
+            room1.Text = Math.Abs(game.render.currentPaths[0]).ToString();
+            room2.Text = Math.Abs(game.render.currentPaths[1]).ToString();
+            room3.Text = Math.Abs(game.render.currentPaths[2]).ToString();
+            room4.Text = Math.Abs(game.render.currentPaths[3]).ToString();
+            room5.Text = Math.Abs(game.render.currentPaths[4]).ToString();
+            room6.Text = Math.Abs(game.render.currentPaths[5]).ToString();
+            RenderScene(game.render);
         }
 
         private void shootArrowPanel_Paint(object sender, PaintEventArgs e)
@@ -549,9 +505,9 @@ namespace WumpusTest
 
         }
 
-        private void shootClick(int room)
+        private void shootClick(int direction)
         {
-            bool shot = game.shoot(game.render.currentPaths[room]);
+            bool shot = game.shoot(Math.Abs(game.render.currentPaths[direction]));
             resolveConflictWithWumpus(shot);
             enableButtons();
             shootArrowPanel.Enabled = false;
@@ -572,7 +528,7 @@ namespace WumpusTest
 
         private void room3_Click_1(object sender, EventArgs e)
         {
-            shootClick(3);
+            shootClick(2);
         }
 
         private void room5_Click_1(object sender, EventArgs e)
@@ -593,7 +549,6 @@ namespace WumpusTest
         {
             if (shot)
             {
-                this.Hide();
                 game.updatePop(8);
                 game.endGame(0);
                 endGameScreen();
@@ -601,18 +556,9 @@ namespace WumpusTest
             else
             {
                 game.updatePop(9);
+                game.moveWumpusIfArrowMissed();
             }
             RenderScene(game.render);
-        }
-
-        private void endGameScreen()
-        {
-            if (game.render.IsGameOver)
-            {
-                var form1 = new EndGame(game.render.cause, game.render.score);
-                form1.Closed += (s, args) => this.Close();
-                form1.Show();
-            }
         }
 
         private void button7_Click_1(object sender, EventArgs e)
@@ -620,6 +566,7 @@ namespace WumpusTest
             shootArrowPanel.Visible = false;
             shootArrowPanel.Enabled = false;
             enableButtons();
+            RenderScene(game.render);
         }
 
         private void label10_Click(object sender, EventArgs e)

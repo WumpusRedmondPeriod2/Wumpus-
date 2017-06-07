@@ -11,9 +11,7 @@ namespace WumpusTest
     {
         //is game over
         public bool IsGameOver;
-        //cause of game end
         public int cause;
-
         //0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
         public int isHazard;
         //indices: 0 - no hazard, 1 - bats, 2 - pit, 3 - wumpus
@@ -51,12 +49,11 @@ namespace WumpusTest
         public String[][] answers;
         public Boolean  correct;
         public String secret;
-
+        public String fact;
         public InGameRenderInfo()
         {
             IsGameOver = false;
             cause = -1;
-            score = 0;
             isHazard = 0;
             wumpusLocation = 0;
             warnings = new ArrayList(0);
@@ -71,6 +68,7 @@ namespace WumpusTest
             answers = new String[0][];
             popUp = new ArrayList(0);
             secret = "";
+            fact = "";
         }
     }
 }

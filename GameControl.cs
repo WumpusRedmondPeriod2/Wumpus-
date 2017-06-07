@@ -11,12 +11,14 @@ namespace WumpusTest
 {
     public class GameControl
     {
-        
+
         public InGameRenderInfo render;
         private Trivia trivia;
         private HighScore scores;
         private Map map;
         private Player player;
+        private string[] factArray;
+        private int factnum;
         private int cavenum;
         int reason = 0;
         //constructor - initializes all objects
@@ -26,7 +28,7 @@ namespace WumpusTest
             startGame();
             player.setPlayerName(playerName);
         }
-        
+
         public void startGame()
         {
             map = new Map(cavenum);
@@ -39,6 +41,7 @@ namespace WumpusTest
             player = new Player();
             render.currentPaths = map.getCurrentConnections(map.getPlayerLocation());
             reason = 0;
+            loadFact();
             updateRender();
         }
         public void updateTurns()
@@ -53,21 +56,23 @@ namespace WumpusTest
         {
             return player.playerScore();
         }
+        public void moveWumpus()
+        {
+            map.moveWumpusAtRandom();
+        }
         public int room()
         {
             return map.getPlayerLocation();
         }
         //logs the high score if it is one, then ends game
-        //0 - player win, 1 - no gold, 2 - no arrow, 3- pit, 4 - wumpus
         public void endGame(int cause)
         {
             render.IsGameOver = true;
             render.cause = cause;
             render.score = returnScore();
-
             scores.addNewHighScore(player.getPlayerName(), render.score);
         }
-        
+
         public void updatePop(int message)
         {
             render.popUp.Add(message);
@@ -113,7 +118,7 @@ namespace WumpusTest
             }
             return render;
         }
-         
+
         //moves the Player
         public InGameRenderInfo movePlayer(int room)
         {
@@ -132,7 +137,7 @@ namespace WumpusTest
             {
                 endGame(1);
             }
-            if (player.getNumOfArrows() == 0)
+            if (player.getNumOfArrows() <= 0)
             {
                 endGame(2);
             }
@@ -165,6 +170,7 @@ namespace WumpusTest
         public InGameRenderInfo updateRender()
         {
             render.warnings = map.checkForHazards();
+            moveWumpus();
             render.wumpusLocation = map.getWumpusLocation();
             int[] pitlocations = map.getBottomLessPitLocations();
             int[] batlocations = map.getBatsLocations();
@@ -231,7 +237,7 @@ namespace WumpusTest
                 case 9:
                     sec = "Be careful! Falling into a pit may return you to your starting room, room " + map.getInitialLoc();
                     break;
-                    
+
             }
             render.secret = sec;
             return render;
@@ -240,7 +246,6 @@ namespace WumpusTest
         //shoots an arrow at specified room
         public bool shoot(int room)
         {
-
             if (player.getNumOfArrows() > 0)
             {
                 player.updateInventory(-1, 0);
@@ -250,6 +255,11 @@ namespace WumpusTest
                 }
             }
             return false;
+        }
+        public void moveWumpusIfArrowMissed()
+        {
+            map.moveWumpusAway();
+            updateRender();
         }
         //asks a question
         public void updateQuestion(int numOfQ)
@@ -271,7 +281,7 @@ namespace WumpusTest
             int correct = 0;
             for (int i = 0; i < numOfQ; i++)
             {
-                if (playerChoice[i].Equals(render.answers[i][4])) 
+                if (playerChoice[i].Equals(render.answers[i][4]))
                 {
                     correct++;
                 }
@@ -321,7 +331,23 @@ namespace WumpusTest
             }
             player.updateInventory(0, 0 - numOfQ);
             updateRender();
+           
+        }
+        public void updateFact()
+        {
+            if (factnum >= 100)
+            {
+                factnum -= 100;
+            }
+            render.fact = factArray[factnum];
+            factnum++;
+        }
+        private void loadFact()
+        {
+            factnum = 0;
+            factArray = System.IO.File.ReadAllLines(@"Facts.txt");
 
         }
     }
+   
 }

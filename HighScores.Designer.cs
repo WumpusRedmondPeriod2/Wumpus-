@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScoreScreen));
             this.scores = new System.Windows.Forms.Label();
             this.orderLabel = new System.Windows.Forms.Label();
             this.ranks = new System.Windows.Forms.Label();
@@ -39,8 +40,10 @@
             // scores
             // 
             this.scores.AutoSize = true;
+            this.scores.BackColor = System.Drawing.Color.SandyBrown;
             this.scores.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.scores.Location = new System.Drawing.Point(176, 29);
+            this.scores.ForeColor = System.Drawing.Color.White;
+            this.scores.Location = new System.Drawing.Point(176, 27);
             this.scores.Name = "scores";
             this.scores.Size = new System.Drawing.Size(186, 36);
             this.scores.TabIndex = 0;
@@ -49,7 +52,9 @@
             // orderLabel
             // 
             this.orderLabel.AutoSize = true;
+            this.orderLabel.BackColor = System.Drawing.Color.SandyBrown;
             this.orderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.orderLabel.ForeColor = System.Drawing.Color.White;
             this.orderLabel.Location = new System.Drawing.Point(32, 93);
             this.orderLabel.Name = "orderLabel";
             this.orderLabel.Size = new System.Drawing.Size(375, 25);
@@ -59,7 +64,9 @@
             // ranks
             // 
             this.ranks.AutoSize = true;
+            this.ranks.BackColor = System.Drawing.Color.SandyBrown;
             this.ranks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ranks.ForeColor = System.Drawing.Color.White;
             this.ranks.Location = new System.Drawing.Point(49, 133);
             this.ranks.Name = "ranks";
             this.ranks.Size = new System.Drawing.Size(23, 225);
@@ -68,7 +75,9 @@
             // 
             // names
             // 
+            this.names.BackColor = System.Drawing.Color.SandyBrown;
             this.names.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.names.ForeColor = System.Drawing.Color.White;
             this.names.Location = new System.Drawing.Point(108, 133);
             this.names.Name = "names";
             this.names.Size = new System.Drawing.Size(222, 225);
@@ -77,7 +86,9 @@
             // 
             // label1
             // 
+            this.label1.BackColor = System.Drawing.Color.SandyBrown;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(349, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(129, 225);
@@ -86,17 +97,21 @@
             // 
             // menuButton
             // 
-            this.menuButton.Location = new System.Drawing.Point(212, 433);
+            this.menuButton.BackColor = System.Drawing.Color.SandyBrown;
+            this.menuButton.ForeColor = System.Drawing.Color.White;
+            this.menuButton.Location = new System.Drawing.Point(182, 421);
             this.menuButton.Name = "menuButton";
-            this.menuButton.Size = new System.Drawing.Size(118, 23);
+            this.menuButton.Size = new System.Drawing.Size(148, 39);
             this.menuButton.TabIndex = 6;
             this.menuButton.Text = "Return to Menu";
-            this.menuButton.UseVisualStyleBackColor = true;
+            this.menuButton.UseVisualStyleBackColor = false;
             // 
             // ScoreScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(552, 491);
             this.Controls.Add(this.menuButton);
             this.Controls.Add(this.label1);

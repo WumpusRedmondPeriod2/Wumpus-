@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EndGame));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -39,7 +40,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.SandyBrown;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(145, 51);
@@ -49,7 +52,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.SandyBrown;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 46);
@@ -58,38 +63,46 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 483);
+            this.button1.BackColor = System.Drawing.Color.SandyBrown;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(12, 471);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 26);
+            this.button1.Size = new System.Drawing.Size(116, 38);
             this.button1.TabIndex = 2;
             this.button1.Text = "Play Again?";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(541, 483);
+            this.button2.BackColor = System.Drawing.Color.SandyBrown;
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(541, 471);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(82, 35);
             this.button2.TabIndex = 3;
             this.button2.Text = "Exit";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(259, 483);
+            this.button3.BackColor = System.Drawing.Color.SandyBrown;
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(255, 468);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(145, 26);
+            this.button3.Size = new System.Drawing.Size(147, 38);
             this.button3.TabIndex = 5;
             this.button3.Text = "View High Scores";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // isNewScore
             // 
             this.isNewScore.AutoSize = true;
+            this.isNewScore.BackColor = System.Drawing.Color.SandyBrown;
             this.isNewScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.isNewScore.ForeColor = System.Drawing.Color.White;
             this.isNewScore.Location = new System.Drawing.Point(13, 196);
             this.isNewScore.Name = "isNewScore";
             this.isNewScore.Size = new System.Drawing.Size(321, 46);
@@ -101,6 +114,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(646, 518);
             this.Controls.Add(this.isNewScore);
             this.Controls.Add(this.button3);

@@ -3,7 +3,7 @@ Where is the Space Needle located?; A. Seattle; B. Sacramento; C. New York City;
 Which continent does Norway belong to?; A. N. America; B. Asia; C. S. America; D. Europe; D. Europe
 Which country is the Mona Lisa located in?; A. Italy; B. United States; C. Germany; D. France; D. France
 What is the square root of 169?; A. 12; B. 13; C. 15; D. 17; B. 13
-The term "dÈjÅEvu" comes from what language?; A. Italian; B. French; C. Latin; D. Spanish; B. French
+The term "deja vu" comes from what language?; A. Italian; B. French; C. Latin; D. Spanish; B. French
 The Great Pyramid of Giza is located in what Egyptian city?; A. Ghana; B. Cairo; C. Madagascar; D. Egypt; B. Cairo
 Which of the great lakes does not share a border with Canada?; A. Lake Ontario; B. Lake Michigan; C. Lake Huron; D. Lake Superior; B. Lake Michigan
 What is the proper term for a group of parrots?; A. Pack; B. Flock; C. Pandemonium; D. None; C. Pandemonium
@@ -16,5 +16,5 @@ What is the unit of length that is approximately 3.26 light-years?; A. Parsec; B
 What is the national animal of Scotland?; A. Griffin; B. Dragon; C. Hydra; D. Unicorn; D. Unicorn
 What was the original flavor of the filling in Twinkies?; A. Chocolate; B. Vanilla; C. Banana cream; D. Peanut; C. Banana cream
 Sauerkraut is made from what finely cut vegetable?; A. Lettuce; B. Spinach; C. Cabbage; D. Kale; C. Cabbage
-Who played the female lead role in the 1986 sci-fi movie "Aliens"?; A. Natalie Portman; B. Sigourney Weaver; C. Carrie Fisher; D. Emma Stone;  B. Sigourney Weaver
-Who painted a late 15th-century mural known as the Last Supper?; A. Leonardo da Vinci; B. Michelangelo; C. Donatello; D. Raphael;  A. Leonardo da Vinci
+Who played the female lead role in the 1986 sci-fi movie "Aliens"?; A. Natalie Portman; B. Sigourney Weaver; C. Carrie Fisher; D. Emma Stone; B. Sigourney Weaver
+Who painted a late 15th-century mural known as the Last Supper?; A. Leonardo da Vinci; B. Michelangelo; C. Donatello; D. Raphael; A. Leonardo da Vinci
