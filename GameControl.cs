@@ -322,7 +322,7 @@ namespace WumpusTest
             return false;
         }
         //moves the Wumpus away if you miss your shot
-        private void moveWumpusIfArrowMissed()
+        public void moveWumpusIfArrowMissed()
         {
             map.moveWumpusAway();
             //updates render info

@@ -16,7 +16,7 @@ namespace WumpusTest
         {
             InitializeComponent();
             game = new GameControl(cavenum, playerName);
-            
+
             playerChoice = new String[game.render.numOfQuestions];
             this.cavenum = cavenum;
             button1.Visible = true;
@@ -185,7 +185,7 @@ namespace WumpusTest
             {
                 textDisplay.Text += "Last Secret Bought:\n" + game.render.secret;
             }
-           
+
             textDisplay.Text += "Trivia: " + game.render.fact;
             endGameScreen();
         }
@@ -233,7 +233,7 @@ namespace WumpusTest
         }
         private void Room5_Click(object sender, EventArgs e)
         {
-            move(4); 
+            move(4);
         }
         private void Room6_Click(object sender, EventArgs e)
         {
@@ -276,14 +276,8 @@ namespace WumpusTest
                     case 4:
                         message = "You escape the pit! You've been returned to where you started.";
                         break;
-                    case 5:
-                        message = "You fall to your death.";
-                        break;
                     case 6:
                         message = "You wound the Wumpus and he escapes";
-                        break;
-                    case 7:
-                        message = "You are eaten by the Wumpus";
                         break;
                     case 8:
                         message = "You hit the Wumpus!";
@@ -333,7 +327,7 @@ namespace WumpusTest
         private void Form1_Load(object sender, EventArgs e)
         {
             //changeSize();
-            game.startGame();
+            game.startGame(cavenum);
             RenderScene(game.render);
             string fileMovement = "tutorialMovement.txt";
             if (!File.Exists(fileMovement))
@@ -344,7 +338,7 @@ namespace WumpusTest
         }
         private void Form1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-           
+
         }
         private void EnterButton_Click(object sender, EventArgs e)
         {
@@ -401,7 +395,7 @@ namespace WumpusTest
                     game.render.askQuestion = false;
                     panel1.Visible = false;
                     correctness.Visible = false;
-                    game.checkAnswer(playerChoice, numOfQ);
+                    game.checkAnswer(playerChoice);
                     currentQ = 0;
                     enableButtons();
                     game.moveCheck();
